@@ -1,0 +1,1909 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>シノビガミ資料庫 (Copy)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+  :root {
+    --bg: #eef1f5;
+    --surface: #ffffff;
+    --surface-2: #e4e9f0;
+    --ink: #1c2434;
+    --ink-2: #4a556b;
+    --line: #cfd6e2;
+    --accent: #2c4a8c;
+    --accent-ink: #ffffff;
+    --accent-soft: #dce4f5;
+    --danger: #a4322f;
+    --sample: #7a5a12;
+    --sample-bg: #f3e8c8;
+    --font-body: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    --font-head: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #11151d;
+      --surface: #1a2030;
+      --surface-2: #232b3f;
+      --ink: #e6eaf3;
+      --ink-2: #a3aec6;
+      --line: #2f3950;
+      --accent: #8fa8e6;
+      --accent-ink: #0f1626;
+      --accent-soft: #24304f;
+      --danger: #f0908c;
+      --sample: #e5c877;
+      --sample-bg: #3a3116;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #11151d;
+    --surface: #1a2030;
+    --surface-2: #232b3f;
+    --ink: #e6eaf3;
+    --ink-2: #a3aec6;
+    --line: #2f3950;
+    --accent: #8fa8e6;
+    --accent-ink: #0f1626;
+    --accent-soft: #24304f;
+    --danger: #f0908c;
+    --sample: #e5c877;
+    --sample-bg: #3a3116;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.7;
+    padding-inline: 16px;
+    padding-block: 24px 48px;
+  }
+  .wrap { max-width: 1040px; margin-inline: auto; display: flex; flex-direction: column; gap: 20px; }
+  header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; }
+  h1 { font-family: var(--font-head); font-size: 28px; line-height: 1.3; margin: 0; letter-spacing: 0.04em; text-wrap: balance; }
+  .count { color: var(--ink-2); font-size: 13px; font-variant-numeric: tabular-nums; }
+  .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .toolbar .grow { flex: 1 1 220px; }
+  input, select, textarea, button { font: inherit; color: var(--ink); }
+  input[type="search"], input[type="text"], select, textarea {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 6px;
+    padding: 8px 10px; width: 100%;
+  }
+  select { width: auto; min-width: 8em; }
+  textarea { min-height: 84px; resize: vertical; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .btn {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 6px;
+    padding: 8px 14px; cursor: pointer; font-weight: 500;
+  }
+  .btn:hover { border-color: var(--accent); }
+  .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 700; }
+  .btn.danger { color: var(--danger); }
+  .btn.small { padding: 3px 10px; font-size: 13px; }
+  .btn.ghost { border-color: transparent; background: none; color: var(--accent); padding-inline: 4px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 14px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+    padding: 16px; display: flex; flex-direction: column; gap: 10px;
+  }
+  .card h2 { font-family: var(--font-head); font-size: 19px; line-height: 1.35; margin: 0; }
+  .badges { display: flex; flex-wrap: wrap; gap: 6px; }
+  .badge {
+    font-size: 12px; font-weight: 700; padding: 1px 9px; border-radius: 99px;
+    background: var(--accent-soft); color: var(--accent); letter-spacing: 0.04em;
+  }
+  .badge.plain { background: var(--surface-2); color: var(--ink-2); }
+  .badge.sample { background: var(--sample-bg); color: var(--sample); }
+  dl.facts { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; margin: 0; font-size: 14px; }
+  dl.facts dt { color: var(--ink-2); font-size: 12px; letter-spacing: 0.08em; padding-top: 2px; }
+  dl.facts dd { margin: 0; }
+  .empty { color: var(--ink-2); }
+  .summary { margin: 0; font-size: 14px; color: var(--ink); }
+  .card-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; padding-top: 4px; }
+  .page { font-size: 12px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .none { padding: 32px 16px; text-align: center; color: var(--ink-2); border: 1px dashed var(--line); border-radius: 8px; }
+  .note { font-size: 12px; color: var(--ink-2); }
+
+  dialog {
+    background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 10px;
+    padding: 0; width: min(560px, calc(100% - 32px)); max-height: calc(100% - 32px);
+  }
+  dialog::backdrop { background: rgba(10, 14, 22, 0.55); }
+  form { display: flex; flex-direction: column; gap: 14px; padding: 20px; }
+  form h3 { font-family: var(--font-head); font-size: 20px; margin: 0; }
+  .field { display: flex; flex-direction: column; gap: 4px; }
+  .field label { font-size: 12px; font-weight: 700; color: var(--ink-2); letter-spacing: 0.06em; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .chips { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+  .chip-group { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+  .chip-label { font-size: 12px; font-weight: 700; color: var(--ink-2); letter-spacing: 0.08em; min-width: 4.5em; }
+  .chip {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 99px;
+    padding: 3px 12px; font-size: 13px; cursor: pointer;
+  }
+  .chip:hover { border-color: var(--accent); }
+  .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 700; }
+  .views { display: flex; gap: 4px; border-bottom: 1px solid var(--line); }
+  .viewbtn { font: inherit; font-weight: 700; color: var(--ink-2); background: none; border: 0; padding: 10px 18px; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -1px; }
+  .viewbtn[aria-pressed="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+  .viewbtn:hover { color: var(--ink); }
+  #view-ninpo, #view-sheet { display: flex; flex-direction: column; gap: 20px; }
+  .sec-title { font-family: var(--font-head); font-size: 18px; margin: 0; }
+  .sheet-sec { display: flex; flex-direction: column; gap: 12px; }
+  dialog.wide { width: min(880px, calc(100% - 24px)); }
+  #sbody { display: flex; flex-direction: column; gap: 16px; padding: 20px; }
+  #sbody h3 { font-family: var(--font-head); font-size: 22px; margin: 0; }
+  #sbody h4 { font-size: 13px; letter-spacing: 0.08em; color: var(--ink-2); margin: 0; }
+  .sec { display: flex; flex-direction: column; gap: 8px; }
+  .skillgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); gap: 10px; }
+  .skillcol { display: flex; flex-direction: column; gap: 4px; }
+  .skillhead { font-weight: 700; font-size: 13px; padding: 2px 0; border-bottom: 2px solid var(--line); }
+  .skillhead.strong { border-bottom-color: var(--accent); color: var(--accent); }
+  .skill { text-align: left; background: var(--surface); border: 1px solid var(--line); border-radius: 5px; padding: 3px 8px; font-size: 13px; cursor: pointer; }
+  .skill[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 700; }
+  .skill.ro { cursor: default; }
+  .picklist { display: flex; flex-direction: column; gap: 4px; max-height: 280px; overflow-y: auto; border: 1px solid var(--line); border-radius: 6px; padding: 6px; }
+  .pick { text-align: left; display: flex; flex-wrap: wrap; gap: 2px 10px; align-items: baseline; background: var(--surface); border: 1px solid transparent; border-radius: 5px; padding: 4px 8px; cursor: pointer; }
+  .pick:hover { border-color: var(--line); }
+  .pick[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); }
+  .pick .nm { font-weight: 700; }
+  .pick .sub { font-size: 12px; color: var(--ink-2); }
+  .selchips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .selchip { background: var(--accent-soft); color: var(--accent); border: 0; border-radius: 99px; padding: 2px 10px; font-size: 13px; font-weight: 700; cursor: pointer; }
+  .warn { font-size: 12px; color: var(--sample); background: var(--sample-bg); border-radius: 6px; padding: 6px 10px; }
+  .kv { display: grid; grid-template-columns: 7em 1fr; gap: 4px 12px; margin: 0; font-size: 14px; }
+  .kv dt { color: var(--ink-2); font-size: 12px; letter-spacing: 0.08em; padding-top: 2px; }
+  .kv dd { margin: 0; white-space: pre-wrap; }
+  .nlist { display: flex; flex-direction: column; gap: 6px; }
+  .nrow { border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; }
+  .nrow .top { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; }
+  .nrow .nm { font-weight: 700; }
+  .nrow .sub { font-size: 12px; color: var(--ink-2); }
+  .nrow p { margin: 4px 0 0; font-size: 13px; }
+  .bondgrid { display: flex; flex-direction: column; gap: 6px; overflow-x: auto; }
+  .bondrow { display: grid; grid-template-columns: minmax(120px, 1.2fr) 44px 44px 44px minmax(120px, 1.2fr) 36px; gap: 6px; align-items: center; min-width: 470px; }
+  .bondrow.head { font-size: 12px; color: var(--ink-2); letter-spacing: 0.08em; }
+  .bondrow input[type="checkbox"] { width: 18px; height: 18px; justify-self: center; }
+  .gearrow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .pickwrap { display: flex; flex-direction: column; gap: 4px; }
+  .pickline { display: flex; gap: 6px; align-items: stretch; }
+  .pickline .pick { flex: 1; }
+  .detail { margin: 0 0 4px 8px; padding: 8px 12px; border-left: 3px solid var(--accent); background: var(--surface-2); border-radius: 0 6px 6px 0; display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
+  .detail p { margin: 0; }
+  .over { color: var(--danger); font-weight: 700; }
+  #view-session { display: flex; flex-direction: column; gap: 20px; }
+  #view-session .toolbar > .sec-title { margin: 0; }
+  .vital { display: flex; flex-direction: column; gap: 6px; }
+  .slots { display: flex; flex-wrap: wrap; gap: 6px; }
+  .slot { min-width: 3.4em; padding: 6px 10px; border: 2px solid var(--accent); border-radius: 4px; background: var(--surface); color: var(--ink); font-weight: 700; font-size: 13px; cursor: pointer; }
+  .slot.extra { border-style: dashed; }
+  .slot.on { background: var(--ink); border-color: var(--ink); color: var(--surface); text-decoration: line-through; }
+  .pcskills { display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
+  .sk { margin-right: 8px; }
+  .sk.dead { text-decoration: line-through; color: var(--ink-2); }
+  .logbox { display: flex; flex-direction: column; gap: 2px; max-height: 260px; overflow-y: auto; font-size: 13px; border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; background: var(--surface); }
+  .row-btns { display: flex; gap: 4px; flex-wrap: wrap; }
+  .selgroup { display: inline-flex; gap: 4px; align-items: center; }
+  .room { --room: #2c4a8c; display: flex; flex-direction: column; gap: 14px; }
+  .banner { background: var(--room); color: #fff; border-radius: 8px; padding: 14px 18px; }
+  .bn-title { font-family: var(--font-head); font-size: 22px; font-weight: 700; }
+  .bn-memo { font-size: 14px; opacity: 0.92; margin-top: 4px; white-space: pre-wrap; }
+  .rtabs { display: flex; gap: 4px; flex-wrap: wrap; border-bottom: 2px solid var(--room); }
+  .rtab { font: inherit; font-weight: 700; padding: 8px 16px; border: 0; background: none; color: var(--ink-2); cursor: pointer; border-radius: 6px 6px 0 0; }
+  .rtab[aria-pressed="true"] { background: var(--room); color: #fff; }
+  .rbody { display: flex; flex-direction: column; gap: 16px; }
+  .plotlist { display: flex; flex-direction: column; gap: 6px; }
+  .plotrow { display: flex; gap: 12px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 6px 12px; }
+  .plotrow .nm { font-weight: 700; min-width: 8em; }
+  .plotorder { margin: 0; padding-left: 1.6em; font-size: 15px; font-weight: 700; }
+  .diceresult { font-size: 17px; font-weight: 700; min-height: 1.6em; padding: 8px 12px; border-radius: 6px; background: var(--surface-2); }
+  .nrow.best { border-color: var(--accent); background: var(--accent-soft); }
+  .wrap.wide { max-width: 1400px; }
+  .roomtop { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; background: var(--room); color: #fff; border-radius: 8px; padding: 10px 14px; }
+  .roomtop .grow { flex: 1 1 200px; min-width: 0; }
+  .roomtop .btn { color: var(--ink); }
+  .stage { border-radius: 8px; padding: 10px; background-color: color-mix(in srgb, var(--room) 12%, var(--bg)); background-size: cover; background-position: center; }
+  .roomgrid { display: grid; grid-template-columns: minmax(250px, 300px) minmax(500px, 1fr) minmax(290px, 360px); gap: 10px; align-items: start; }
+  @media (max-width: 1240px) { .roomgrid { grid-template-columns: minmax(260px, 320px) minmax(0, 1fr); } .chatcol { grid-column: 1 / -1; } }
+  @media (max-width: 720px) { .roomgrid { grid-template-columns: 1fr; } .chatcol { order: -1; } .plotboard { order: 0; } }
+  .plotboard { display: flex; flex-direction: column; gap: 10px; max-height: 80vh; overflow-y: auto; }
+  @media (max-width: 860px) { .plotboard { max-height: none; } }
+  .velocity { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 3px; }
+  .vcol { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 2px 4px; border: 2px solid var(--ink); border-radius: 4px; background: var(--surface); color: var(--ink); cursor: pointer; font: inherit; min-width: 0; }
+  .vcol.dark { background: var(--ink); color: var(--surface); }
+  .vcol:disabled { cursor: default; opacity: 1; }
+  .vcol:not(:disabled):hover { outline: 2px solid var(--accent); }
+  .vkanji { font-family: var(--font-head); font-weight: 700; font-size: 26px; line-height: 1.1; }
+  .ven { font-size: 8px; letter-spacing: 0.02em; text-align: center; line-height: 1.15; overflow-wrap: anywhere; }
+  .vjp { font-size: 11px; font-weight: 700; text-align: center; line-height: 1.2; }
+  .vpip { font-size: 20px; line-height: 1; }
+  .vnum { font-family: var(--font-head); font-size: 30px; font-weight: 700; line-height: 1; }
+  .vtokens { display: flex; flex-direction: column; gap: 2px; width: 100%; min-height: 70px; align-items: stretch; }
+  .vtoken { font-size: 11px; font-weight: 700; background: var(--accent); color: var(--accent-ink); border-radius: 3px; padding: 1px 3px; text-align: center; overflow-wrap: anywhere; line-height: 1.2; }
+  .vtoken.enemy { background: var(--danger); color: #fff; }
+  .vtoken.armed { outline: 2px solid var(--ink); outline-offset: 1px; }
+  .vcol.dark .vtoken.armed { outline-color: var(--surface); }
+  .vfumble { font-size: 9px; border-top: 1px solid currentColor; width: 100%; text-align: center; padding-top: 3px; margin-top: auto; line-height: 1.2; }
+  .echips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .echip { display: inline-flex; align-items: center; gap: 2px; }
+  .echipbtn { font: inherit; display: inline-flex; gap: 6px; align-items: center; padding: 3px 10px; border: 1px solid var(--line); border-radius: 99px; background: var(--surface); color: var(--ink); cursor: pointer; }
+  .echipbtn[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); font-weight: 700; }
+  .echipbtn:disabled { cursor: default; opacity: 0.7; }
+  .fieldlist { display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
+  .frow { display: flex; flex-direction: column; padding: 4px 8px; border-radius: 4px; border: 1px solid var(--line); }
+  .frow.on { border-color: var(--accent); background: var(--accent-soft); }
+  .seg { display: inline-flex; border: 2px solid #fff; border-radius: 6px; overflow: hidden; }
+  .segbtn { font: inherit; font-weight: 700; padding: 5px 12px; border: 0; background: transparent; color: #fff; cursor: pointer; }
+  .segbtn[aria-pressed="true"] { background: #fff; color: var(--room); }
+  .segbtn:disabled { cursor: default; }
+  .mtabs { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+  .mtab { font: inherit; font-size: 13px; font-weight: 700; padding: 4px 12px; border: 1px solid var(--line); border-radius: 99px; background: var(--surface); color: var(--ink-2); cursor: pointer; }
+  .mtab[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .tlist { display: flex; flex-direction: column; gap: 4px; }
+  .trow { display: flex; gap: 12px; align-items: baseline; padding: 6px 10px; border: 1px solid var(--line); border-radius: 6px; font-size: 14px; }
+  .trow b { min-width: 1.6em; font-size: 16px; }
+  .trow b.wide { min-width: 7em; }
+  .trow.hit { border-color: var(--accent); background: var(--accent-soft); outline: 2px solid var(--accent); }
+  .steps { margin: 4px 0; padding-left: 1.4em; font-size: 14px; }
+  .skname { font-weight: 700; margin-right: 6px; }
+  .dicenums { font-variant-numeric: tabular-nums; font-weight: 700; margin-right: 6px; }
+  .flag { font-size: 12px; font-weight: 700; padding: 1px 8px; border-radius: 99px; color: #fff; }
+  .tgt { font-size: 12px; color: var(--ink-2); margin-right: 6px; }
+  .flag.ok { background: var(--accent); color: var(--accent-ink); }
+  .flag.ng { background: var(--ink-2); color: var(--surface); }
+  .flag.sp { background: var(--accent); color: var(--accent-ink); }
+  .flag.fb { background: var(--danger); color: #fff; }
+  .plotrow.enemy { border-left: 4px solid var(--danger); }
+  .plotrow .pv { font-weight: 700; min-width: 2em; text-align: center; }
+  .chathead { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 12px; border-bottom: 1px solid var(--line); }
+  .msgdel { border: 0; background: none; color: var(--ink-2); cursor: pointer; font-size: 14px; padding: 0 6px; opacity: 0.5; }
+  .msgdel:hover { opacity: 1; color: var(--danger); }
+  .rside { display: flex; flex-direction: column; gap: 10px; max-height: 80vh; overflow-y: auto; padding-right: 2px; }
+  @media (max-width: 860px) { .rside { max-height: none; } }
+  .panel { background: color-mix(in srgb, var(--surface) 94%, transparent); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; }
+  .quick { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .quick select { min-width: 0; max-width: 100%; }
+  .pchead { display: flex; flex-direction: column; gap: 0; }
+  .pc .pchead h2 { font-size: 17px; }
+  .pc { padding: 10px 12px; gap: 8px; background: color-mix(in srgb, var(--surface) 94%, transparent); }
+  .slot.small { min-width: 0; padding: 3px 8px; font-size: 12px; }
+  .chatcol { display: flex; flex-direction: column; background: color-mix(in srgb, var(--surface) 94%, transparent); border: 1px solid var(--line); border-radius: 8px; height: 80vh; min-height: 380px; overflow: hidden; }
+  @media (max-width: 1180px) { .chatcol { height: 60vh; } }
+  .chatlog { flex: 1; overflow-y: auto; padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; }
+  .msg .who { font-weight: 700; margin-right: 8px; }
+  .msg .time { font-size: 11px; color: var(--ink-2); }
+  .msg .body { white-space: pre-wrap; overflow-wrap: anywhere; }
+  .msg .body.dice { font-variant-numeric: tabular-nums; background: var(--accent-soft); border-radius: 6px; padding: 4px 10px; margin-top: 2px; display: inline-block; }
+  .sysmsg { font-size: 12px; color: var(--ink-2); }
+  .chatform { display: flex; flex-direction: column; gap: 6px; padding: 8px 10px; border-top: 1px solid var(--line); }
+  .sendrow { display: flex; gap: 6px; }
+  .sendrow input { flex: 1; min-width: 0; }
+  .helpbox { font-size: 12px; color: var(--ink-2); }
+  .helpbox summary { cursor: pointer; }
+  .toast { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--surface); padding: 8px 16px; border-radius: 8px; font-size: 13px; z-index: 50; max-width: calc(100% - 32px); overflow-wrap: anywhere; }
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; }
+  .thumb { border: 2px solid var(--line); border-radius: 6px; padding: 0; background: var(--surface-2); cursor: pointer; aspect-ratio: 16 / 10; overflow: hidden; color: var(--ink); font-weight: 700; }
+  .thumb[aria-pressed="true"] { border-color: var(--accent); outline: 2px solid var(--accent); }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .paramrow { display: grid; grid-template-columns: minmax(90px, 0.6fr) 1fr 36px; gap: 6px; align-items: center; }
+  #view-enemy { display: flex; flex-direction: column; gap: 16px; }
+  .avatar { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 2px solid var(--line); background: var(--surface-2); }
+  .avatar.sm { width: 28px; height: 28px; border-width: 1px; }
+  .avatar.xs { width: 18px; height: 18px; border-width: 1px; vertical-align: middle; margin-right: 3px; }
+  .cardimg { width: 100%; height: 170px; object-fit: cover; border-radius: 6px; }
+  .pcrow { display: flex; gap: 10px; align-items: center; }
+  .pcicon { width: 68px; height: 68px; flex: none; border-radius: 50%; object-fit: cover; border: 2px solid var(--line); background: var(--surface-2); }
+  .pcbanner { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; }
+  .zoomable { cursor: zoom-in; }
+  .lightbox { width: min(96vw, 1100px); max-height: 96vh; padding: 0; background: transparent; border: 0; }
+  .lightbox::backdrop { background: rgba(0, 0, 0, 0.75); }
+  .lbwrap { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 10px; }
+  .lbwrap img { max-width: 100%; max-height: 82vh; object-fit: contain; border-radius: 8px; background: #000; }
+  .pvwrap { position: relative; display: inline-block; line-height: 0; cursor: crosshair; }
+  .pvwrap img { max-width: 260px; max-height: 260px; object-fit: contain; border-radius: 8px; border: 1px solid var(--line); }
+  .focusmark { position: absolute; width: 22px; height: 22px; margin: -11px 0 0 -11px; border: 3px solid #fff; border-radius: 50%; box-shadow: 0 0 0 2px var(--accent), inset 0 0 0 2px var(--accent); pointer-events: none; }
+  .viewimg { max-width: min(100%, 340px); max-height: 420px; border-radius: 8px; object-fit: contain; align-self: flex-start; background: var(--surface-2); }
+  .portrait-box { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+
+  .row3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  @media (max-width: 460px) { .row { grid-template-columns: 1fr; } }
+  .badge.rank { background: var(--surface-2); color: var(--ink); border: 1px solid var(--line); }
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; align-items: center; }
+  .actions .right { display: flex; gap: 8px; margin-left: auto; }
+  .err { color: var(--danger); font-size: 13px; min-height: 1.2em; }
+  .app-error { color: var(--danger); background: color-mix(in srgb, var(--danger) 10%, var(--surface)); border: 1px solid var(--danger); border-radius: 8px; padding: 10px 12px; }
+  @media (prefers-reduced-motion: no-preference) { .card { transition: border-color 0.15s; } .card:hover { border-color: var(--accent); } }
+</style>
+
+<div class="wrap" id="wrap">
+  <header>
+    <h1>シノビガミ資料庫</h1>
+    <span class="count" id="count" aria-live="polite">読み込み中…</span>
+  </header>
+
+  <nav class="views" aria-label="表示切り替え">
+    <button class="viewbtn" data-view="ninpo" aria-pressed="true">忍法一覧</button>
+    <button class="viewbtn" data-view="sheet" aria-pressed="false">キャラシ</button>
+    <button class="viewbtn" data-view="enemy" aria-pressed="false" hidden>エネミー</button>
+    <button class="viewbtn" data-view="session" aria-pressed="false">セッション</button>
+  </nav>
+
+  <div id="user-api-error" class="app-error" role="alert" hidden></div>
+
+<div id="view-ninpo">
+  <div class="toolbar" id="toolbar">
+    <div class="grow"><input type="search" id="q" placeholder="名前・指定特技・効果で検索" aria-label="検索"></div>
+    <select id="sort" aria-label="並び順">
+      <option value="page">掲載順（ページ）</option>
+      <option value="type">タイプ別 → 名前順</option>
+      <option value="name">名前順</option>
+    </select>
+    <button class="btn primary" id="add" hidden>＋ 忍法を追加</button>
+  </div>
+
+  <div class="chips" id="chips">
+    <div class="chip-group" id="chips-ryuha" role="group" aria-label="流派で絞り込み"></div>
+    <div class="chip-group" id="chips-group" role="group" aria-label="区分で絞り込み"></div>
+    <div class="chip-group" id="chips-type" role="group" aria-label="タイプで絞り込み"></div>
+    <button class="btn ghost small" id="chip-clear" hidden>選択を解除</button>
+  </div>
+
+  <div id="list"></div>
+  <p class="note">効果の欄は原文の転記ではなく、自分の言葉で短く要約して入力してください。詳しい文面は「p.○○」を見てルールブックで確認します。</p>
+</div>
+
+<div id="view-sheet" hidden>
+  <div class="toolbar">
+    <div class="grow"><input type="search" id="sq" placeholder="キャラ名・プレイヤー名で検索" aria-label="キャラシを検索"></div>
+    <input type="file" id="sheet-import" accept=".bab" hidden>
+    <button class="btn" id="sheet-import-btn" hidden>TRPGSheet .bab を取り込む</button>
+    <button class="btn primary" id="sheet-add" hidden>＋ 新しいキャラシ</button>
+  </div>
+  <div id="sheet-list"></div>
+</div>
+
+<div id="view-enemy" hidden>
+  <div class="toolbar">
+    <div class="grow"><input type="search" id="eq" placeholder="エネミー名で検索" aria-label="エネミーを検索" autocomplete="off"></div>
+    <button class="btn primary" id="enemy-add">＋ エネミーを作る</button>
+  </div>
+  <div class="note">エネミーのデータは、あなた（GM）だけが見られます。ほかの人には見えません。部屋のプロット置き場で、ここから配置できます。</div>
+  <div id="enemy-list"></div>
+</div>
+
+<div id="view-session" hidden>
+  <div class="toolbar" id="sess-head">
+    <div class="grow"><input type="text" id="sess-name" placeholder="新しい部屋の名前" aria-label="セッション名" autocomplete="off"></div>
+    <button class="btn primary" id="sess-new" hidden>＋ 部屋を作る</button>
+  </div>
+  <div id="sess-body"></div>
+  <div id="toast" class="toast" role="status" hidden></div>
+</div>
+</div>
+
+<dialog id="idlg" class="lightbox" aria-label="画像"><div class="lbwrap"><img id="idlg-img" alt=""><button type="button" class="btn" id="idlg-close">閉じる</button></div></dialog>
+
+<dialog id="rdlg" class="wide" aria-label="部屋の設定"><div id="rbody" style="padding:20px;display:flex;flex-direction:column;gap:14px"></div></dialog>
+
+<dialog id="ddlg" class="wide" aria-label="ダメージ"><div id="dbody" style="padding:20px;display:flex;flex-direction:column;gap:14px"></div></dialog>
+
+<dialog id="sdlg" class="wide" aria-label="キャラシ"><div id="sbody"></div></dialog>
+
+<dialog id="dlg" aria-labelledby="dlg-title">
+  <form id="form" method="dialog"></form>
+</dialog>
+
+<script src="local-api.js"></script>
+<script>
+(() => {
+  const TYPES = ['攻撃', 'サポート', '装備'];
+
+  const $ = (s) => document.querySelector(s);
+  const h = (tag, attrs = {}, ...kids) => {
+    const el = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (v === false || v == null) continue;
+      if (k === 'class') el.className = v;
+      else if (k.startsWith('on')) el.addEventListener(k.slice(2), v);
+      else el.setAttribute(k, v === true ? '' : v);
+    }
+    for (const kid of kids.flat()) {
+      if (kid == null || kid === false) continue;
+      el.append(kid.nodeType ? kid : document.createTextNode(String(kid)));
+    }
+    return el;
+  };
+
+  const state = { db: null, tab: 'ninpo', ryuha: [], ninpo: [], canWrite: true, q: '', fRyuha: new Set(), fType: new Set(), fGroup: new Set(), sort: 'page', view: 'ninpo', uid: null, userApi: null, userApiError: '', names: {}, sheetDocs: [], tokugi: null, ranks: null, ougiRef: null, ougiPriv: {}, sq: '', eq: '', enemyItems: {}, sessions: [], sessId: null, pcImgMode: (() => { try { return localStorage.getItem('sg_pcimg') || 'icon'; } catch (_) { return 'icon'; } })(), plotArm: null, plotWant: null, chat: {}, roomUI: null, chatUnsub: null, images: [], assets: null, selfName: '', henchRef: null, ready: { ryuha: false, ninpo: false, sheets: false, sessions: false } };
+  const fromSnap = (snap) => snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+  const ryuhaName = (id) => (id ? (state.ryuha.find((r) => r.id === id)?.name ?? '（削除された流派）') : '');
+
+  // ---------- rendering ----------
+  function renderCount() {
+    $('#count').textContent = state.ready.ryuha && state.ready.ninpo
+      ? `流派 ${state.ryuha.length} ・ 忍法 ${state.ninpo.length}`
+      : '読み込み中…';
+  }
+
+  function showUserApiError() {
+    state.userApiError = 'ユーザー情報の取得に失敗しました。ログイン状態を確認して、ページを再読み込みしてください。';
+    const error = $('#user-api-error');
+    error.textContent = state.userApiError;
+    error.hidden = false;
+  }
+
+  function chipGroup(host, label, items, selected, onToggle) {
+    host.replaceChildren(
+      h('span', { class: 'chip-label' }, label),
+      ...items.map(([val, name]) => h('button', { type: 'button', class: 'chip', 'aria-pressed': String(selected.has(val)), onclick: () => onToggle(val) }, name)));
+  }
+
+  function renderChips() {
+    for (const id of [...state.fRyuha]) if (!state.ryuha.some((r) => r.id === id)) state.fRyuha.delete(id);
+    const toggle = (set) => (v) => { if (set.has(v)) set.delete(v); else set.add(v); renderChips(); renderList(); };
+    chipGroup($('#chips-ryuha'), '流派', state.ryuha.map((r) => [r.id, r.name]), state.fRyuha, toggle(state.fRyuha));
+    // 流派を選んだときだけ、その流派にある区分を出す
+    const inScope = state.fRyuha.size ? state.ninpo.filter((n) => state.fRyuha.has(n.ryuhaId)) : [];
+    const seen = [];
+    for (const n of inScope) if (n.group && !seen.includes(n.group)) seen.push(n.group);
+    const order = ['流派忍法', '秘伝忍法'];
+    seen.sort((a, b) => (order.indexOf(a) < 0 ? 9 : order.indexOf(a)) - (order.indexOf(b) < 0 ? 9 : order.indexOf(b)));
+    for (const g of [...state.fGroup]) if (!seen.includes(g)) state.fGroup.delete(g);
+    $('#chips-group').hidden = !seen.length;
+    chipGroup($('#chips-group'), '区分', seen.map((g) => [g, g]), state.fGroup, toggle(state.fGroup));
+    chipGroup($('#chips-type'), 'タイプ', TYPES.map((t) => [t, t]), state.fType, toggle(state.fType));
+    $('#chip-clear').hidden = !(state.fRyuha.size || state.fType.size || state.fGroup.size);
+  }
+
+  function renderTabs() {
+    $('#add').hidden = !state.canWrite;
+    $('#sheet-import-btn').hidden = !state.canWrite;
+  }
+
+  // 並び順: page=掲載ページ順（同じページ内は登録順） / type=タイプ別→名前 / name=名前
+  const typeRank = (t) => { const i = TYPES.indexOf(t); return i < 0 ? 99 : i; };
+  const pageNum = (n) => { const m = String(n.page ?? '').match(/\d+/); return m ? parseInt(m[0], 10) : Infinity; };
+  const byName = (a, b) => String(a.name).localeCompare(String(b.name), 'ja');
+  const byId = (a, b) => String(a.id).localeCompare(String(b.id));
+  const SORTERS = {
+    page: (a, b) => (pageNum(a) === pageNum(b) ? 0 : pageNum(a) < pageNum(b) ? -1 : 1) || byId(a, b),
+    type: (a, b) => typeRank(a.type) - typeRank(b.type) || byName(a, b),
+    name: byName,
+  };
+
+  const hit = (obj, keys, q) => !q || keys.some((k) => String(obj[k] ?? '').toLowerCase().includes(q));
+
+  function renderList() {
+    const list = $('#list');
+    if (!state.ready.ryuha || !state.ready.ninpo) { list.replaceChildren(h('div', { class: 'none' }, '読み込み中…')); return; }
+    const q = state.q.trim().toLowerCase();
+    const items = state.ninpo
+      .filter((n) => hit(n, ['name', 'group', 'skill', 'rank', 'dmgA', 'dmgS', 'dmgG', 'summary'], q))
+      .filter((n) => !state.fRyuha.size || state.fRyuha.has(n.ryuhaId))
+      .filter((n) => !state.fGroup.size || state.fGroup.has(n.group))
+      .filter((n) => !state.fType.size || state.fType.has(n.type))
+      .sort(SORTERS[state.sort]);
+    list.replaceChildren(items.length
+      ? h('div', { class: 'grid' }, items.map(ninpoCard))
+      : h('div', { class: 'none' }, state.ninpo.length ? '条件に合う忍法がありません。' : 'まだ忍法が登録されていません。'));
+  }
+
+  const fact = (label, value) => [h('dt', {}, label), h('dd', {}, value || h('span', { class: 'empty' }, '未入力'))];
+
+  // 接近戦=a / 射撃戦=s / 集団戦=g の順で、値のあるものだけ返す
+  const dmgParts = (n) => [['a', n.dmgA], ['s', n.dmgS], ['g', n.dmgG]].filter(([, v]) => v).map(([k, v]) => `${k}${v}`);
+
+  function ninpoCard(n) {
+    const rn = ryuhaName(n.ryuhaId);
+    return h('article', { class: 'card' },
+      h('h2', {}, n.name),
+      h('div', { class: 'badges' },
+        n.sample && h('span', { class: 'badge sample' }, 'サンプル'),
+        n.type && h('span', { class: 'badge' }, n.type),
+        h('span', { class: 'badge plain' }, rn || '流派なし'),
+        n.group && h('span', { class: 'badge plain' }, n.group),
+        n.rank && h('span', { class: 'badge rank' }, `${n.rank}以上`)),
+      h('dl', { class: 'facts' }, fact('指定特技', n.skill), fact('間合', n.range), fact('コスト', n.cost),
+        (dmgParts(n).length || n.type === '攻撃') && fact('ダメージ', dmgParts(n).length ? dmgParts(n).join('　') : '')),
+      n.summary && h('p', { class: 'summary' }, n.summary),
+      h('div', { class: 'card-foot' },
+        h('span', { class: 'page' }, n.page ? `p.${n.page}` : ''),
+        state.canWrite && h('button', { class: 'btn small', onclick: () => openForm('ninpo', n) }, '編集')));
+  }
+
+  // ---------- form ----------
+  const dlg = $('#dlg');
+  const form = $('#form');
+
+  function field(id, label, control) { return h('div', { class: 'field' }, h('label', { for: id }, label), control); }
+  const text = (id, v = '', req = false, ph = '') => h('input', { type: 'text', id, name: id, value: v, required: req, placeholder: ph, autocomplete: 'off' });
+  const select = (id, opts, v = '') => {
+    const s = h('select', { id, name: id }, opts.map(([val, lab]) => h('option', { value: val }, lab)));
+    s.value = v; return s;
+  };
+
+  function openForm(kind, item) {
+    const isNew = !item;
+    const d = item || {};
+    let armed = false;
+    const err = h('div', { class: 'err', role: 'alert' });
+    const del = h('button', { type: 'button', class: 'btn danger', onclick: () => {
+      if (!armed) { armed = true; del.textContent = '本当に削除する'; return; }
+      state.db.collection(kind).doc(item.id).delete().then(() => dlg.close()).catch((e) => { err.textContent = `削除できませんでした（${e.code || 'error'}）`; });
+    } }, '削除');
+
+    const body = [
+        field('f-name', '忍法名', text('f-name', d.name, true)),
+        h('div', { class: 'row' },
+          field('f-ryuhaId', '流派', select('f-ryuhaId', [['', '未設定'], ...state.ryuha.map((r) => [r.id, r.name]), ['__new', '＋ 新しい流派を追加…']], isNew ? (state.ryuha.some((r) => r.id === 'r-hanyou') ? 'r-hanyou' : '') : (d.ryuhaId || ''))),
+          field('f-group', '区分（流派忍法・秘伝忍法など）', h('input', { type: 'text', id: 'f-group', name: 'f-group', value: d.group || '', list: 'groups', autocomplete: 'off' })),
+          field('f-type', 'タイプ', select('f-type', [['', '未設定'], ...TYPES.map((t) => [t, t])], d.type || ''))),
+        h('div', { class: 'field', id: 'new-ryuha-box', hidden: true }, h('label', { for: 'f-newRyuha' }, '新しい流派名'), text('f-newRyuha')),
+        h('div', { class: 'row' },
+          field('f-skill', '指定特技', text('f-skill', d.skill)),
+          field('f-range', '間合', text('f-range', d.range))),
+        h('div', { class: 'row' },
+          field('f-cost', 'コスト', text('f-cost', d.cost)),
+          field('f-rank', '階級制限（この階級以上）', h('input', { type: 'text', id: 'f-rank', name: 'f-rank', value: d.rank || '', list: 'ranks', placeholder: '制限なしは空欄', autocomplete: 'off' }))),
+        h('datalist', { id: 'groups' }, ['流派忍法', '秘伝忍法'].map((g) => h('option', { value: g }))),
+        h('datalist', { id: 'ranks' }, ['中忍', '中忍頭', '上忍', '上忍頭'].map((r) => h('option', { value: r }))),
+        h('div', { class: 'row3' },
+          field('f-dmgA', '接近戦 (a)', text('f-dmgA', d.dmgA, false, '例: 1（+1）')),
+          field('f-dmgS', '射撃戦 (s)', text('f-dmgS', d.dmgS)),
+          field('f-dmgG', '集団戦 (g)', text('f-dmgG', d.dmgG))),
+        field('f-page', '掲載ページ', text('f-page', d.page, false, '例: 120')),
+        field('f-summary', '効果の要約（自分の言葉で）', h('textarea', { id: 'f-summary', name: 'f-summary' }, d.summary || '')),
+      ];
+
+    form.replaceChildren(
+      h('h3', { id: 'dlg-title' }, `忍法を${isNew ? '追加' : '編集'}`),
+      ...body, err,
+      h('div', { class: 'actions' },
+        !isNew && del,
+        h('div', { class: 'right' },
+          h('button', { type: 'button', class: 'btn', onclick: () => dlg.close() }, 'キャンセル'),
+          h('button', { type: 'submit', class: 'btn primary', id: 'save' }, '保存'))));
+
+    form.querySelector('#f-ryuhaId').addEventListener('change', (e) => { form.querySelector('#new-ryuha-box').hidden = e.target.value !== '__new'; });
+
+    form.onsubmit = async (ev) => {
+      ev.preventDefault();
+      const v = (id) => form.querySelector('#' + id).value.trim();
+      const data = { name: v('f-name'), ryuhaId: v('f-ryuhaId'), group: v('f-group'), type: v('f-type'), skill: v('f-skill'), range: v('f-range'), cost: v('f-cost'), rank: v('f-rank'), dmgA: v('f-dmgA'), dmgS: v('f-dmgS'), dmgG: v('f-dmgG'), page: v('f-page'), summary: v('f-summary') };
+      if (!data.name) { err.textContent = '名前を入力してください。'; return; }
+      const newRyuha = v('f-newRyuha');
+      if (data.ryuhaId === '__new' && !newRyuha) { err.textContent = '新しい流派名を入力してください。'; return; }
+      const save = $('#save'); save.disabled = true;
+      try {
+        if (data.ryuhaId === '__new') {
+          const ref = await state.db.collection('ryuha').add({ name: newRyuha, strength: '', ougi: '', summary: '', page: '', order: Math.max(0, ...state.ryuha.map((r) => r.order ?? 0)) + 1 });
+          data.ryuhaId = ref.id;
+        }
+        const col = state.db.collection(kind);
+        await (isNew ? col.add(data) : col.doc(item.id).set(data));
+        dlg.close();
+      } catch (e) {
+        err.textContent = e.code === 'invalid_argument' ? '保存する権限がありません（閲覧のみのアカウントです）。' : `保存できませんでした（${e.code || 'error'}）。もう一度お試しください。`;
+        save.disabled = false;
+      }
+    };
+    dlg.showModal();
+  }
+
+  // ---------- character sheets ----------
+  const sdlg = $('#sdlg');
+  const sbody = $('#sbody');
+  const RANK_HINTS = ['中忍', '中忍頭', '上忍', '上忍頭'];
+  const STRENGTH_NAMES = () => (state.tokugi?.fields ?? []).map((f) => f.name);
+  const allTokugi = () => new Set((state.tokugi?.fields ?? []).flatMap((f) => f.skills));
+
+  const allSheets = () => state.sheetDocs.flatMap((d) => Object.entries(d.items || {}).map(([id, s]) => ({ ...s, id, owner: d.id })));
+  const ownerName = (uid) => (uid === state.uid ? 'あなた' : (state.names[uid] || '名前不明'));
+  const ninpoById = (id) => state.ninpo.find((n) => n.id === id);
+  const OUGI_EFFECTS = ['クリティカルヒット', '範囲攻撃', '不死身', '絶対防御', '完全成功', '判定妨害', '追加忍法'];
+  const RANK_ORDER = ['草', '下忍', '下忍頭', '中忍', '中忍頭', '上忍', '上忍頭', '頭領', '首領'];
+  const rankIdx = (r) => RANK_ORDER.indexOf(r);
+  const rankLimit = (name) => state.ranks?.ranks?.find((r) => r.name === name) || null;
+  const BASIC_NINPO = '接近戦攻撃';
+  const MULTI_NINPO = ['頑健']; // 複数回取得できる忍法
+  const canEditSheets = () => state.canWrite && !!state.uid;
+
+  function renderView() {
+    for (const b of document.querySelectorAll('.viewbtn')) b.setAttribute('aria-pressed', String(b.dataset.view === state.view));
+    $('#view-ninpo').hidden = state.view !== 'ninpo';
+    $('#view-sheet').hidden = state.view !== 'sheet';
+    $('#view-session').hidden = state.view !== 'session';
+    $('#view-enemy').hidden = state.view !== 'enemy';
+    if (state.view === 'enemy') renderEnemies();
+    if (state.view === 'sheet') renderSheets();
+    if (state.view === 'session') renderSessions();
+  }
+
+  function sheetCard(s) {
+    const skills = (s.skills || []).length;
+    const ninpo = (s.ninpoIds || []).length;
+    return h('article', { class: 'card' },
+      s.portrait && portraitEl({ thumb: s.portrait, focus: s.focus, full: s.hasFull ? { kind: 'pc', owner: s.owner, id: s.id } : null, cls: 'cardimg', upgrade: 'lazy', alt: s.name }),
+      h('h2', {}, s.name || '（名前なし）'),
+      h('div', { class: 'badges' },
+        s.ryuhaId && h('span', { class: 'badge' }, ryuhaName(s.ryuhaId)),
+        s.rank && h('span', { class: 'badge plain' }, s.rank),
+        s.strength && h('span', { class: 'badge plain' }, `得意 ${s.strength}`)),
+      h('dl', { class: 'facts' }, fact('プレイヤー', s.player), fact('作成者', ownerName(s.owner)), fact('特技', `${skills}個`), fact('忍法', `${ninpo}個`)),
+      h('div', { class: 'card-foot' },
+        h('span', { class: 'page' }, s.updatedAt ? new Date(s.updatedAt).toLocaleDateString('ja-JP') : ''),
+        h('button', { class: 'btn small', onclick: () => openSheetView(s) }, '開く')));
+  }
+
+  // エネミー（GMだけが見られる）
+  function updateNav() {
+    const b = document.querySelector('[data-view=enemy]');
+    if (!b) return;
+    const gm = isGmUser();
+    b.hidden = !gm;
+    if (!gm && state.view === 'enemy') { state.view = 'ninpo'; renderView(); }
+  }
+  function renderEnemies() {
+    const host = $('#enemy-list');
+    $('#enemy-add').hidden = !isGmUser();
+    const q = state.eq.trim().toLowerCase();
+    const list = enemyList().filter((s) => !q || [s.name, s.player].some((v) => String(v ?? '').toLowerCase().includes(q)));
+    host.replaceChildren(list.length ? h('div', { class: 'grid' }, list.map((s) => h('article', { class: 'card' },
+      s.portrait && portraitEl({ thumb: s.portrait, focus: s.focus, full: s.hasFull ? { kind: 'enemy', owner: state.uid, id: s.id } : null, cls: 'cardimg', upgrade: 'lazy', alt: s.name }),
+      h('h2', {}, s.name || '（名前なし）'),
+      h('div', { class: 'badges' }, h('span', { class: 'badge sample' }, 'エネミー'), s.ryuhaId && h('span', { class: 'badge' }, ryuhaName(s.ryuhaId)), s.rank && h('span', { class: 'badge plain' }, s.rank)),
+      h('dl', { class: 'facts' }, ...(s.params || []).slice(0, 3).flatMap((r) => [h('dt', {}, r.k || '-'), h('dd', {}, r.v || '-')]), ...fact('特技', `${(s.skills || []).length}個`), ...fact('忍法', `${(s.ninpoIds || []).length}個`)),
+      h('div', { class: 'card-foot' }, h('span', { class: 'page' }, s.updatedAt ? new Date(s.updatedAt).toLocaleDateString('ja-JP') : ''), h('button', { class: 'btn small', onclick: () => openSheetView(s) }, '開く')))))
+      : h('div', { class: 'none' }, state.enemyItems && Object.keys(state.enemyItems).length ? '条件に合うエネミーがいません。' : '「＋ エネミーを作る」から作成できます。'));
+  }
+
+  function renderSheets() {
+    const host = $('#sheet-list');
+    $('#sheet-add').hidden = !canEditSheets();
+    if (!state.ready.sheets) { host.replaceChildren(h('div', { class: 'none' }, '読み込み中…')); return; }
+    const q = state.sq.trim().toLowerCase();
+    const list = allSheets()
+      .filter((s) => !q || [s.name, s.player].some((v) => String(v ?? '').toLowerCase().includes(q)))
+      .sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
+    const mine = list.filter((s) => s.owner === state.uid);
+    const others = list.filter((s) => s.owner !== state.uid);
+    const sec = (title, items, empty) => h('section', { class: 'sheet-sec' },
+      h('h2', { class: 'sec-title' }, title),
+      items.length ? h('div', { class: 'grid' }, items.map(sheetCard)) : h('div', { class: 'none' }, empty));
+    host.replaceChildren(
+      !state.uid && h('div', { class: 'warn' }, 'ローカルユーザー情報を確認できません。ページを再読み込みしてください。'),
+      (state.uid && state.canWrite === false) && h('div', { class: 'warn' }, 'このローカルサーバーには書き込めません。サーバーの起動状態とフォルダーの書き込み権限を確認してください。'),
+      sec('自分のキャラシ', mine, canEditSheets() ? '「＋ 新しいキャラシ」から作成できます。' : 'まだありません。'),
+      sec('みんなのキャラシ', others, 'ほかの人のキャラシは、まだありません。'));
+  }
+
+  async function saveSheet(id, data) {
+    const ref = state.db.doc('sheets/' + state.uid);
+    const snap = await ref.get();
+    const payload = { items: { [id]: data } };
+    await (snap.exists ? ref.update(payload) : ref.set(payload));
+  }
+  async function deleteSheet(id) {
+    await state.db.doc('sheets/' + state.uid).update({ items: { [id]: { __delete__: true } } });
+    try { await state.db.doc('data/users/' + state.uid + '/ougi').update({ items: { [id]: { __delete__: true } } }); } catch (_) { /* 奥義がなければ何もしない */ }
+  }
+
+  // TRPGSheetの .bab は、JSON文字列の各文字コードを +26 した形式です。
+  // 未対応の項目はメモに残し、資料庫で編集して補完できるようにします。
+  function decodeBab(text) {
+    const encoded = JSON.parse(text);
+    if (typeof encoded !== 'string') throw new Error('BABファイルの形式が正しくありません。');
+    const json = Array.from(encoded, (ch) => String.fromCharCode(ch.charCodeAt(0) - 26)).join('');
+    const data = JSON.parse(json);
+    if (!data || typeof data !== 'object' || !data.Name) throw new Error('シノビガミ用のキャラクターデータが見つかりません。');
+    return data;
+  }
+  const babList = (value) => { try { const items = JSON.parse(value || '[]'); return Array.isArray(items) ? items : []; } catch (_) { return []; } };
+  const BAB_BELIEFS = ['我', '忠', '情', '和', '凶'];
+  const BAB_RANKS = ['', '下忍', '中忍', '中忍頭', '上忍', '上忍頭'];
+  async function importBab(file) {
+    const source = decodeBab(await file.text());
+    const arts = babList(source.NinjaArts).filter((art) => art?.Name);
+    const backgrounds = babList(source.Backgrounds).filter((item) => item?.Name).map((item) => `${item.IsStrength ? '長所' : '弱点'}: ${item.Name}${item.Note ? `（${item.Note}）` : ''}`);
+    const relations = babList(source.Relationships).filter((item) => item?.Name).map((item) => ({ name: item.Name, place: !!item.HasInfoAddress, secret: !!item.HasInfoSecret, ougi: !!item.HasInfoSecretArts, emotion: '' }));
+    const tools = babList(source.NinjaTools);
+    const quantity = (name) => String(tools.find((item) => item?.Name === name)?.Quantity ?? '');
+    const school = state.ryuha.find((item) => item.name === source.School);
+    const ninpoIds = arts.map((art) => state.ninpo.find((item) => item.name === art.Name)?.id).filter(Boolean);
+    const unregisteredArts = arts.filter((art) => !state.ninpo.some((item) => item.name === art.Name)).map((art) => art.Name);
+    const notes = [
+      'TRPGSheetの .bab から取り込み',
+      source.Regulation ? `レギュレーション: ${source.Regulation}` : '',
+      source.School && !school ? `流派（未登録）: ${source.School}` : '',
+      source.Rank !== undefined ? `TRPGSheet階級コード: ${source.Rank}` : '',
+      source.ModifiedGap ? `修正: ${source.ModifiedGap}` : '',
+      unregisteredArts.length ? `未登録の忍法: ${unregisteredArts.join('、')}` : '',
+    ].filter(Boolean).join('\n');
+    const sheet = {
+      name: String(source.Name).trim(), player: String(source.PlayerName || '').trim(), ryuhaId: school?.id || '',
+      rank: BAB_RANKS[source.Rank] || '', strength: '', belief: BAB_BELIEFS[source.Belief] || '',
+      face: String(source.OstensibleWork || '').trim(), age: String(source.Age || '').trim(), gender: String(source.Sex || '').trim(), style: '', merit: '',
+      skills: [], ninpoIds, ninpoCounts: {}, background: backgrounds.join('\n'), bondList: relations,
+      gearN: { hyoro: quantity('兵糧丸'), jinzu: quantity('神通丸'), tonkou: quantity('遁甲符') }, gear: '', memo: notes, updatedAt: Date.now(),
+    };
+    const id = 's' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    await saveSheet(id, sheet);
+    await saveOugi(id, { name: '', effect: '', skill: '', note: '' });
+    renderSheets();
+    alert(`「${sheet.name}」をキャラシとして登録しました。未登録の項目はメモを確認して編集してください。`);
+  }
+  // イメージ画像: 一覧用の小さい画像(サムネイル)と、拡大用の大きい画像の2つを作る
+  async function shrinkImage(file) {
+    const bmp = await createImageBitmap(file);
+    const hasWebp = (() => { try { return document.createElement('canvas').toDataURL('image/webp').startsWith('data:image/webp'); } catch (_) { return false; } })();
+    const encode = (side, q) => {
+      const sc = Math.min(1, side / Math.max(bmp.width, bmp.height));
+      const w = Math.max(1, Math.round(bmp.width * sc)), hh = Math.max(1, Math.round(bmp.height * sc));
+      const c = document.createElement('canvas');
+      c.width = w; c.height = hh;
+      const ctx = c.getContext('2d');
+      ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+      ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, w, hh); ctx.drawImage(bmp, 0, 0, w, hh);
+      return c.toDataURL(hasWebp ? 'image/webp' : 'image/jpeg', q);
+    };
+    // 画質を落とすより先に、大きさを少しずつ小さくする（画質0.8以上を保つ）
+    const fit = (sides, limit) => {
+      let last = '';
+      for (const side of sides) for (const q of [0.92, 0.88, 0.84, 0.8]) { last = encode(side, q); if (last.length <= limit) return last; }
+      for (const q of [0.74, 0.68, 0.6]) { last = encode(sides[sides.length - 1], q); if (last.length <= limit) return last; }
+      return last;
+    };
+    return { thumb: fit([320, 280, 240, 200], 24000), full: fit([2000, 1700, 1450, 1250, 1050, 900, 760], FULL_LIMIT) };
+  }
+  const FULL_CHUNK = 230000; // 1つの保存領域に入れられる文字数の目安（上限は約26万）
+  const FULL_LIMIT = FULL_CHUNK * 3; // 拡大用の画像は、最大3つに分けて保存する
+  // 大きい画像を、必要なときだけ読む（キャラは公開の置き場、エネミーはGMだけの置き場）
+  const fullCache = new Map();
+  const fullPath = (kind, owner, id) => (kind === 'enemy' ? `data/users/${owner}/eimg_${id}` : kind === 'pub' ? `portraits/${id}` : `portraits/${owner}_${id}`);
+  async function loadFull(kind, owner, id) {
+    const k = fullPath(kind, owner, id);
+    if (fullCache.has(k)) return fullCache.get(k);
+    try {
+      const snap = await state.db.doc(k).get();
+      if (!snap.exists) { fullCache.set(k, null); return null; }
+      const d = snap.data();
+      let url = d.url || '';
+      for (let i = 1; i < (d.n || 1); i++) { const ps = await state.db.doc(`${k}_p${i}`).get(); url += ps.exists ? (ps.data().url || '') : ''; }
+      fullCache.set(k, url || null);
+      return url || null;
+    } catch (_) { return null; }
+  }
+  async function saveFull(kind, owner, id, url) {
+    const path = fullPath(kind, owner, id);
+    const parts = url ? url.match(new RegExp(`[\\s\\S]{1,${FULL_CHUNK}}`, 'g')) : [];
+    if (parts.length) {
+      await state.db.doc(path).set({ owner, url: parts[0], n: parts.length });
+      for (let i = 1; i < parts.length; i++) await state.db.doc(`${path}_p${i}`).set({ owner, url: parts[i] });
+      fullCache.set(path, url);
+    } else { fullCache.delete(path); try { await state.db.doc(path).delete(); } catch (_) { /* なければ何もしない */ } }
+    for (let i = Math.max(1, parts.length); i < 4; i++) { try { await state.db.doc(`${path}_p${i}`).delete(); } catch (_) { /* なければ何もしない */ } }
+  }
+  const focusStyle = (f) => `object-position:${f ? f.x : 50}% ${f ? f.y : 25}%`;
+  // 顔の位置(focus)を使って切り抜く画像。押すと拡大。upgrade=trueなら、大きい画像に差し替える
+  function portraitEl({ thumb, focus, full, cls, upgrade, alt }) {
+    const img = h('img', { class: (cls || '') + ' zoomable', src: thumb, alt: alt || '', style: focusStyle(focus), title: 'クリックで拡大' });
+    img.addEventListener('click', (e) => { e.stopPropagation(); openLightbox({ thumb, full, alt }); });
+    if (upgrade && full) {
+      const up = () => loadFull(full.kind, full.owner, full.id).then((u) => { if (u) img.src = u; });
+      // 一覧では、画面に見えたものだけ、大きい画像に差し替える（読み込みを減らすため）
+      if (upgrade === 'lazy' && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); up(); } }, { rootMargin: '200px' });
+        io.observe(img);
+      } else up();
+    }
+    return img;
+  }
+  function openLightbox({ thumb, full, alt }) {
+    const dlgI = $('#idlg'), im = $('#idlg-img');
+    im.src = thumb; im.alt = alt || '';
+    if (full) loadFull(full.kind, full.owner, full.id).then((u) => { if (u && dlgI.open) im.src = u; });
+    if (!dlgI.open) dlgI.showModal();
+  }
+  const DOC_LIMIT = 230000; // 1人ぶんのキャラシ（またはエネミー）をまとめた保存領域の上限（文字数の目安）
+  // エネミーのデータは、GM本人だけが読める領域に保存する
+  async function saveEnemy(id, data) {
+    const ref = state.db.doc('data/users/' + state.uid + '/enemies');
+    const snap = await ref.get();
+    const payload = { items: { [id]: data } };
+    await (snap.exists ? ref.update(payload) : ref.set(payload));
+  }
+  async function deleteEnemy(id) {
+    await state.db.doc('data/users/' + state.uid + '/enemies').update({ items: { [id]: { __delete__: true } } });
+  }
+  const enemyList = () => Object.entries(state.enemyItems || {}).map(([id, s]) => ({ ...s, id, owner: state.uid, isEnemy: true })).sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
+  const isGmUser = () => !!state.uid && state.sessions.some((x) => x.gmUid === state.uid);
+  // 奥義は他の人に見せない。本人だけが読める領域に保存する
+  async function saveOugi(id, o) {
+    const ref = state.db.doc('data/users/' + state.uid + '/ougi');
+    const snap = await ref.get();
+    const payload = { items: { [id]: o } };
+    await (snap.exists ? ref.update(payload) : ref.set(payload));
+  }
+
+  function skillStatus(skill, skills) {
+    if (!skill || !allTokugi().has(skill)) return null;
+    return skills.has(skill) ? '習得済み' : '特技未習得';
+  }
+
+  function openSheetView(s) {
+    const skills = new Set(s.skills || []);
+    const mine = s.owner === state.uid;
+    const fields = state.tokugi?.fields ?? [];
+    const copyText = () => {
+      const lines = [
+        `【${s.name}】${s.player ? `（PL: ${s.player}）` : ''}`,
+        `流派: ${ryuhaName(s.ryuhaId) || '-'} / 階級: ${s.rank || '-'} / 得意分野: ${s.strength || '-'}`,
+        `信念: ${s.belief || '-'} / 流儀: ${s.style || '-'} / 表の顔: ${s.face || '-'}`,
+        `特技: ${(s.skills || []).join('、') || '-'}`,
+        '忍法:', ...(s.ninpoIds || []).map((id) => { const n = ninpoById(id); return n ? `・${n.name}（${n.skill || '-'} / 間合${n.range || '-'} / コスト${n.cost || '-'}）` : '・（削除された忍法）'; }),
+        `背景: ${s.background || '-'}`,
+        `人物欄: ${(s.bondList || []).map((b) => `${b.name}${b.emotion ? '(' + b.emotion + ')' : ''}`).join('、') || '-'}`,
+        `忍具: ${[['兵糧丸', s.gearN?.hyoro], ['神通丸', s.gearN?.jinzu], ['遁甲符', s.gearN?.tonkou]].filter(([, n]) => n).map(([k, n]) => `${k}×${n}`).join(' ')} ${s.gear || ''}`.trim(),
+      ];
+      return lines.join('\n');
+    };
+    const copyBtn = h('button', { class: 'btn', onclick: async () => {
+      try { await navigator.clipboard.writeText(copyText()); copyBtn.textContent = 'コピーしました'; } catch (_) { copyBtn.textContent = 'コピーできませんでした'; }
+    } }, 'テキストをコピー');
+    sbody.replaceChildren(
+      h('h3', {}, s.name || '（名前なし）', s.isEnemy && h('span', { class: 'badge sample' }, 'エネミー（GMだけが見られます）')),
+      s.portrait && portraitEl({ thumb: s.portrait, focus: null, full: s.hasFull ? { kind: s.isEnemy ? 'enemy' : 'pc', owner: s.owner, id: s.id } : null, cls: 'viewimg', upgrade: true, alt: s.name }),
+      s.isEnemy && (s.params || []).length ? h('dl', { class: 'kv' }, ...(s.params || []).flatMap((r) => [h('dt', {}, r.k || '-'), h('dd', {}, r.v || '-')])) : null,
+      h('dl', { class: 'kv' },
+        h('dt', {}, s.isEnemy ? '分類' : 'プレイヤー'), h('dd', {}, s.player || '-'),
+        h('dt', {}, '流派'), h('dd', {}, ryuhaName(s.ryuhaId) || '-'),
+        h('dt', {}, '階級'), h('dd', {}, s.rank || '-'),
+        h('dt', {}, '得意分野'), h('dd', {}, s.strength || '-'),
+        h('dt', {}, '信念'), h('dd', {}, s.belief || '-'),
+        h('dt', {}, '表の顔'), h('dd', {}, s.face || '-'),
+        h('dt', {}, '年齢・性別'), h('dd', {}, [s.age, s.gender].filter(Boolean).join(' ／ ') || '-'),
+        h('dt', {}, '流儀'), h('dd', {}, s.style || '-'),
+        h('dt', {}, '功績'), h('dd', {}, s.merit || '-'),
+        h('dt', {}, '作成者'), h('dd', {}, ownerName(s.owner))),
+      h('div', { class: 'sec' }, h('h4', {}, `特技（${skills.size}個）`),
+        fields.length ? h('div', { class: 'skillgrid' }, fields.map((f) => h('div', { class: 'skillcol' },
+          h('div', { class: 'skillhead' + (s.strength === f.name ? ' strong' : '') }, f.name),
+          f.skills.filter((k) => skills.has(k)).map((k) => h('span', { class: 'skill ro', 'aria-pressed': 'true' }, k)))))
+          : h('div', { class: 'note' }, (s.skills || []).join('、') || '-')),
+      h('div', { class: 'sec' }, h('h4', {}, `忍法（${(s.ninpoIds || []).length}個）`),
+        h('div', { class: 'nlist' }, (s.ninpoIds || []).map((id) => {
+          const n = ninpoById(id);
+          if (!n) return h('div', { class: 'nrow' }, '（削除された忍法）');
+          const st = skillStatus(n.skill, skills);
+          return h('div', { class: 'nrow' },
+            h('div', { class: 'top' }, h('span', { class: 'nm' }, n.name + ((s.ninpoCounts?.[id] || 1) > 1 ? ` ×${s.ninpoCounts[id]}` : '')),
+              h('span', { class: 'sub' }, `${n.type || ''} ／ 指定特技 ${n.skill || '-'} ／ 間合 ${n.range || '-'} ／ コスト ${n.cost || '-'}${dmgParts(n).length ? ' ／ ' + dmgParts(n).join(' ') : ''}`),
+              st && h('span', { class: 'badge ' + (st === '習得済み' ? '' : 'sample') }, st)),
+            n.summary && h('p', {}, n.summary));
+        }))),
+      h('div', { class: 'sec' }, h('h4', {}, '奥義'),
+        mine ? (() => {
+          const o = (s.isEnemy ? s.ougi : state.ougiPriv[s.id]) || {};
+          return h('dl', { class: 'kv' },
+            h('dt', {}, '奥義名'), h('dd', {}, o.name || '-'),
+            h('dt', {}, '効果'), h('dd', {}, o.effect || '-'),
+            h('dt', {}, '指定特技'), h('dd', {}, o.skill || '-'),
+            h('dt', {}, '設定'), h('dd', {}, o.note || '-'),
+            (o.name2 || o.effect2 || o.skill2) && [h('dt', {}, '奥義2'), h('dd', {}, [o.name2, o.effect2, o.skill2 && `指定特技 ${o.skill2}`, o.note2].filter(Boolean).join(' ／ '))],
+            (o.name3 || o.effect3 || o.skill3) && [h('dt', {}, '奥義3'), h('dd', {}, [o.name3, o.effect3, o.skill3 && `指定特技 ${o.skill3}`, o.note3].filter(Boolean).join(' ／ '))]);
+        })() : h('div', { class: 'note' }, '奥義は本人だけが見られます。')),
+      h('dl', { class: 'kv' },
+        h('dt', {}, '背景'), h('dd', {}, s.background || '-'),
+        h('dt', {}, '忍具'), h('dd', {}, [['兵糧丸', s.gearN?.hyoro], ['神通丸', s.gearN?.jinzu], ['遁甲符', s.gearN?.tonkou]].filter(([, n]) => n !== undefined && n !== '').map(([k, n]) => `${k}×${n}`).join('　') + (s.gear ? `\n${s.gear}` : '') || '-'),
+        h('dt', {}, 'メモ'), h('dd', {}, s.memo || '-')),
+      h('div', { class: 'sec' }, h('h4', {}, '人物欄'),
+        (s.bondList || []).length ? h('div', { class: 'nlist' }, s.bondList.map((b) => h('div', { class: 'nrow' },
+          h('div', { class: 'top' }, h('span', { class: 'nm' }, b.name || '（名前なし）'),
+            h('span', { class: 'sub' }, ['居所', '秘密', '奥義'].filter((t, i) => b[['place', 'secret', 'ougi'][i]]).map((t) => `${t}✔`).join(' ')),
+            b.emotion && h('span', { class: 'badge plain' }, b.emotion))))) : h('div', { class: 'note' }, s.bonds || '-')),
+      h('div', { class: 'actions' },
+        h('div', {}, mine && canEditSheets() && h('button', { class: 'btn', onclick: () => openSheetEditor(s, s.isEnemy ? 'enemy' : 'pc') }, '編集')),
+        h('div', { class: 'right' }, copyBtn, h('button', { class: 'btn', onclick: () => sdlg.close() }, '閉じる'))));
+    sdlg.showModal();
+  }
+
+  function openSheetEditor(sheet, kind = 'pc') {
+    const isEnemy = kind === 'enemy';
+    const isNew = !sheet;
+    const d = sheet || {};
+    const basic = isNew ? state.ninpo.find((n) => n.name === '接近戦攻撃') : null;
+    const sel = { skills: new Set(d.skills || []), ninpo: new Set(d.ninpoIds || (basic ? [basic.id] : [])) };
+    const fields = state.tokugi?.fields ?? [];
+    const err = h('div', { class: 'err', role: 'alert' });
+    let armed = false;
+
+    const paramRows = (d.params && d.params.length ? d.params : [{ k: '脅威度', v: '' }, { k: '生命力', v: '' }]).map((r) => ({ ...r }));
+    const paramHost = h('div', { class: 'bondgrid' });
+    const renderParams = () => paramHost.replaceChildren(
+      ...paramRows.map((r, i) => h('div', { class: 'paramrow' },
+        h('input', { type: 'text', value: r.k || '', list: 'param-names', placeholder: '項目名', 'aria-label': '項目名', autocomplete: 'off', oninput: (e) => { r.k = e.target.value; } }),
+        h('input', { type: 'text', value: r.v || '', placeholder: '値・内容', 'aria-label': '値', autocomplete: 'off', oninput: (e) => { r.v = e.target.value; } }),
+        h('button', { type: 'button', class: 'btn small', 'aria-label': 'この行を削除', onclick: () => { paramRows.splice(i, 1); renderParams(); } }, '×'))),
+      h('div', {}, h('button', { type: 'button', class: 'btn small', onclick: () => { paramRows.push({}); renderParams(); } }, '＋ 項目を追加')));
+    const bondRows = (d.bondList && d.bondList.length ? d.bondList : [{}, {}, {}]).map((b) => ({ ...b }));
+    const bondHost = h('div', { class: 'bondgrid' });
+    const renderBonds = () => bondHost.replaceChildren(
+      h('div', { class: 'bondrow head' }, ...['人物名', '居所', '秘密', '奥義', '感情'].map((t) => h('span', {}, t)), h('span', {})),
+      ...bondRows.map((b, i) => h('div', { class: 'bondrow' },
+        h('input', { type: 'text', value: b.name || '', placeholder: '人物名', 'aria-label': '人物名', oninput: (e) => { b.name = e.target.value; } }),
+        ...[['place', '居所'], ['secret', '秘密'], ['ougi', '奥義']].map(([k, lab]) => h('input', { type: 'checkbox', checked: !!b[k], 'aria-label': lab, onchange: (e) => { b[k] = e.target.checked; } })),
+        h('input', { type: 'text', value: b.emotion || '', placeholder: '例: 信頼(+)', 'aria-label': '感情', oninput: (e) => { b.emotion = e.target.value; } }),
+        h('button', { type: 'button', class: 'btn small', 'aria-label': 'この行を削除', onclick: () => { bondRows.splice(i, 1); renderBonds(); } }, '×'))),
+      h('div', {}, h('button', { type: 'button', class: 'btn small', onclick: () => { bondRows.push({}); renderBonds(); } }, '＋ 人物を追加')));
+    const inp = (id, v, req = false, ph = '') => h('input', { type: 'text', id, value: v || '', required: req, placeholder: ph, autocomplete: 'off' });
+    const area = (id, v, ph = '') => h('textarea', { id, placeholder: ph }, v || '');
+    const og = (sheet && (isEnemy ? sheet.ougi : state.ougiPriv[sheet.id])) || {};
+    const ogv = [
+      { name: og.name || '', effect: og.effect || '', skill: og.skill || '', note: og.note || '' },
+      { name: og.name2 || '', effect: og.effect2 || '', skill: og.skill2 || '', note: og.note2 || '' },
+      { name: og.name3 || '', effect: og.effect3 || '', skill: og.skill3 || '', note: og.note3 || '' },
+    ];
+    const ougiHost = h('div', { class: 'sec' });
+    const ougiSlots = () => { if (isEnemy) return 3; const L = rankLimit(rankInp.value.trim()); return L ? (L.maxOugi ?? 1) : 1; };
+    const renderOugi = () => {
+      const n = ougiSlots();
+      const L = isEnemy ? null : rankLimit(rankInp.value.trim());
+      ougiHost.replaceChildren(
+        h('h4', {}, `奥義（${isEnemy ? 'GMだけが見られます' : '本人だけが見られます'}）${L ? `　${rankInp.value.trim()}: ${n}つまで` : ''}`),
+        n === 0 ? h('div', { class: 'note' }, 'この階級は奥義を持てません。') : '',
+        ...ogv.slice(0, n).map((o, i) => {
+          const hint = h('div', { class: 'note' });
+          const showH = () => { const t = state.ougiRef?.effects?.[o.effect]; hint.textContent = t ? `${o.effect}: ${t}（p.${state.ougiRef.page || '38'}）` : ''; };
+          const eff = select(`s-oe${i}`, [['', '未設定'], ...OUGI_EFFECTS.map((e) => [e, e])], o.effect);
+          eff.addEventListener('change', () => { o.effect = eff.value; showH(); });
+          const sk = select(`s-os${i}`, [['', '未設定'], ...[...allTokugi()].map((k) => [k, k])], o.skill);
+          sk.addEventListener('change', () => { o.skill = sk.value; });
+          showH();
+          return h('div', { class: 'sec' },
+            n > 1 && h('h4', {}, `奥義${i + 1}`),
+            h('div', { class: 'row' }, field(`s-on${i}`, '奥義名', h('input', { type: 'text', id: `s-on${i}`, value: o.name, autocomplete: 'off', oninput: (e) => { o.name = e.target.value; } })), field(`s-oe${i}`, '効果', eff)),
+            hint,
+            h('div', { class: 'row' }, field(`s-os${i}`, '指定特技', sk), field(`s-note${i}`, '奥義の設定', h('input', { type: 'text', id: `s-note${i}`, value: o.note, autocomplete: 'off', oninput: (e) => { o.note = e.target.value; } }))));
+        }));
+    };
+    const strengthSel = select('s-strength', [['', '未設定'], ...fields.map((f) => [f.name, f.name])], d.strength || '');
+    const ryuhaSel = select('s-ryuha', [['', '未設定'], ...state.ryuha.map((r) => [r.id, r.name])], d.ryuhaId || '');
+
+    // 特技
+    const skillHost = h('div', { class: 'skillgrid' });
+    const skillCount = h('h4', {});
+    const ninpoHead = h('h4', {});
+    const limitMsg = h('div', { class: 'warn', hidden: true });
+    const rankInp = h('input', { type: 'text', id: 's-rank', value: d.rank || '', list: 's-ranks', autocomplete: 'off' });
+    const lim = () => (isEnemy ? null : rankLimit(rankInp.value.trim()));
+    const strengthField = () => (state.tokugi?.fields ?? []).find((f) => f.name === strengthSel.value);
+    const skillUse = (extra) => {
+      const cap = state.ranks?.strengthSkills ?? 3;
+      const inField = new Set(strengthField()?.skills ?? []);
+      const all = extra ? [...sel.skills, extra] : [...sel.skills];
+      const inS = all.filter((k) => inField.has(k)).length;
+      return { cap, inS, free: (all.length - inS) + Math.max(0, inS - cap) };
+    };
+    const counts = { ...(d.ninpoCounts || {}) };
+    const cnt = (id) => counts[id] || 1;
+    const nNinpo = () => [...sel.ninpo].filter((id) => ninpoById(id)?.name !== BASIC_NINPO).reduce((a, id) => a + cnt(id), 0);
+    const say = (t) => { limitMsg.textContent = t; limitMsg.hidden = !t; };
+    const renderCounts = () => {
+      const L = lim();
+      const sk = sel.skills.size, nn = nNinpo();
+      const u = skillUse();
+      skillCount.replaceChildren(L
+        ? h('span', {}, `特技（${sk}個）　得意分野 ${Math.min(u.inS, u.cap)}/${u.cap}　自由枠 `, h('span', { class: u.free > L.freeSkills ? 'over' : '' }, `${u.free}/${L.freeSkills}`))
+        : `特技（${sk}個）`);
+      ninpoHead.replaceChildren(`忍法（${nn}個`, L?.maxNinpo != null ? h('span', { class: nn > L.maxNinpo ? 'over' : '' }, ` / 上限${L.maxNinpo}`) : '', '）', h('span', { class: 'note' }, `　${BASIC_NINPO}は数えません`));
+      if (isEnemy) say('');
+      else if (!L && rankInp.value.trim() && state.ranks) say('この階級の上限は登録されていません。');
+      else if (!state.ranks) say('階級ごとの上限は、まだ登録されていません。');
+      else if ((L && u.free > L.freeSkills) || (L?.maxNinpo != null && nn > L.maxNinpo)) say('選んだ数が階級の上限を超えています。減らしてください。');
+      else say('');
+    };
+    const canAdd = (kind, arg) => {
+      const L = lim();
+      if (!L) return true;
+      if (kind === 'skill') {
+        if (!strengthField()) { say('先に得意分野（または流派）を選んでください。'); return false; }
+        if (skillUse(arg).free > L.freeSkills) { say(`得意分野の${skillUse().cap}個と、自由枠${L.freeSkills}個（${rankInp.value.trim()}）を使い切っています。`); return false; }
+      }
+      if (kind === 'ninpo' && L.maxNinpo != null && nNinpo() >= L.maxNinpo) { say(`${rankInp.value.trim()}の忍法は${L.maxNinpo}個までです（${BASIC_NINPO}を除く）。`); return false; }
+      return true;
+    };
+    const openDetail = new Set();
+    const renderSkills = () => {
+      renderCounts();
+      skillHost.replaceChildren(...fields.map((f) => h('div', { class: 'skillcol' },
+        h('div', { class: 'skillhead' + (strengthSel.value === f.name ? ' strong' : '') }, f.name + (strengthSel.value === f.name ? '（得意）' : '')),
+        f.skills.map((k) => h('button', { type: 'button', class: 'skill', 'aria-pressed': String(sel.skills.has(k)), onclick: () => { if (sel.skills.has(k)) sel.skills.delete(k); else if (!canAdd('skill', k)) return; else sel.skills.add(k); renderSkills(); renderPick(); renderSel(); } }, k)))));
+    };
+    strengthSel.addEventListener('change', renderSkills);
+    ryuhaSel.addEventListener('change', () => {
+      const r = state.ryuha.find((x) => x.id === ryuhaSel.value);
+      if (r?.strength && [...strengthSel.options].some((o) => o.value === r.strength)) { strengthSel.value = r.strength; renderSkills(); }
+      pickR.value = ryuhaSel.value || ''; renderPick();
+    });
+
+    // 忍法
+    const selHost = h('div', { class: 'selchips' });
+    const pickHost = h('div', { class: 'picklist' });
+    const pickQ = h('input', { type: 'search', id: 's-pq', placeholder: '忍法名・指定特技で探す', autocomplete: 'off' });
+    const pickR = select('s-pr', [['', 'すべての流派'], ['__sel', '選んだ忍法だけ'], ...state.ryuha.map((r) => [r.id, r.name])], d.ryuhaId || '');
+    const renderSel = () => {
+      renderCounts();
+      selHost.replaceChildren(...[...sel.ninpo].map((id) => {
+        const n = ninpoById(id);
+        const multi = n && MULTI_NINPO.includes(n.name);
+        return h('span', { class: 'selgroup' },
+          h('button', { type: 'button', class: 'selchip', title: 'クリックで外す', onclick: () => { sel.ninpo.delete(id); delete counts[id]; renderSel(); renderPick(); } }, `${n ? n.name : '（削除された忍法）'}${multi && cnt(id) > 1 ? ` ×${cnt(id)}` : ''} ×`),
+          multi && h('button', { type: 'button', class: 'btn small', title: 'もう1つ取得する', onclick: () => { if (!canAdd('ninpo')) return; counts[id] = cnt(id) + 1; renderSel(); } }, '＋1'),
+          multi && cnt(id) > 1 && h('button', { type: 'button', class: 'btn small', title: '1つ減らす', onclick: () => { counts[id] = cnt(id) - 1; if (counts[id] <= 1) delete counts[id]; renderSel(); } }, '－1'));
+      }));
+      if (!sel.ninpo.size) selHost.append(h('span', { class: 'note' }, 'まだ選んでいません。下の一覧から選びます。'));
+    };
+    const renderPick = () => {
+      const q = pickQ.value.trim().toLowerCase();
+      const curRank = rankIdx(rankInp.value.trim());
+      const items = state.ninpo
+        .filter((n) => (pickR.value === '__sel' ? sel.ninpo.has(n.id) : (!pickR.value || n.ryuhaId === pickR.value)))
+        .filter((n) => !q || [n.name, n.skill, n.group].some((v) => String(v ?? '').toLowerCase().includes(q)))
+        .sort(SORTERS.page);
+      const detailBox = (n) => h('div', { class: 'detail' },
+        h('div', {}, `${ryuhaName(n.ryuhaId)}${n.group ? ' ／ ' + n.group : ''} ／ ${n.type || '-'}`),
+        h('div', {}, `指定特技 ${n.skill || '-'} ／ 間合 ${n.range || '-'} ／ コスト ${n.cost || '-'}${dmgParts(n).length ? ' ／ ダメージ ' + dmgParts(n).join(' ') : ''}`),
+        n.rank && h('div', {}, `階級制限: ${n.rank}以上`),
+        n.summary && h('p', {}, n.summary),
+        h('div', { class: 'note' }, n.page ? `p.${n.page}` : ''));
+      pickHost.replaceChildren(...items.slice(0, 80).map((n) => h('div', { class: 'pickwrap' },
+        h('div', { class: 'pickline' },
+          h('button', { type: 'button', class: 'pick', 'aria-pressed': String(sel.ninpo.has(n.id)), onclick: () => { if (sel.ninpo.has(n.id)) sel.ninpo.delete(n.id); else if (n.name !== BASIC_NINPO && !canAdd('ninpo')) return; else sel.ninpo.add(n.id); renderPick(); renderSel(); } },
+            h('span', { class: 'nm' }, n.name),
+            h('span', { class: 'sub' }, `${n.type || ''} ／ ${n.group || ryuhaName(n.ryuhaId)} ／ 指定特技 ${n.skill || '-'}${n.skill && allTokugi().has(n.skill) ? (sel.skills.has(n.skill) ? '（習得済み）' : '（未習得）') : ''} ／ 間合 ${n.range || '-'} ／ コスト ${n.cost || '-'}`),
+            n.rank && h('span', { class: 'badge ' + (curRank >= 0 && rankIdx(n.rank) > curRank ? 'sample' : 'plain') }, `${n.rank}以上${curRank >= 0 && rankIdx(n.rank) > curRank ? '（階級不足）' : ''}`)),
+          h('button', { type: 'button', class: 'btn small', 'aria-expanded': String(openDetail.has(n.id)), onclick: () => { if (openDetail.has(n.id)) openDetail.delete(n.id); else openDetail.add(n.id); renderPick(); } }, openDetail.has(n.id) ? '閉じる' : '詳細')),
+        openDetail.has(n.id) && detailBox(n))));
+      if (items.length > 80) pickHost.append(h('div', { class: 'note' }, `ほか${items.length - 80}件。流派や検索語で絞り込んでください。`));
+      if (!items.length) pickHost.append(h('div', { class: 'note' }, '該当する忍法がありません。'));
+    };
+    pickQ.addEventListener('input', renderPick);
+    pickR.addEventListener('change', renderPick);
+
+    const del = h('button', { type: 'button', class: 'btn danger', onclick: async () => {
+      if (!armed) { armed = true; del.textContent = '本当に削除する'; return; }
+      try { await (isEnemy ? deleteEnemy(sheet.id) : deleteSheet(sheet.id)); sdlg.close(); } catch (e) { err.textContent = `削除できませんでした（${e.code || 'error'}）`; }
+    } }, '削除');
+    const save = h('button', { type: 'button', class: 'btn primary', onclick: async () => {
+      const v = (id) => sbody.querySelector('#' + id).value.trim();
+      const data = {
+        portrait, focus: portrait ? focus : null, hasFull: portrait ? (portraitFull ? true : !!d.hasFull) : false, name: v('s-name'), player: v('s-player'), ryuhaId: ryuhaSel.value, rank: v('s-rank'), strength: strengthSel.value,
+        belief: v('s-belief'), face: v('s-face'), age: v('s-age'), gender: v('s-gender'), style: v('s-style'), merit: v('s-merit'),
+        skills: [...sel.skills], ninpoIds: [...sel.ninpo], ninpoCounts: Object.fromEntries(Object.entries(counts).filter(([id, n]) => sel.ninpo.has(id) && n > 1)),
+        background: v('s-bg'), bondList: bondRows.filter((b) => (b.name || '').trim() || (b.emotion || '').trim()).map((b) => ({ name: (b.name || '').trim(), place: !!b.place, secret: !!b.secret, ougi: !!b.ougi, emotion: (b.emotion || '').trim() })),
+        gearN: { hyoro: v('s-g1'), jinzu: v('s-g2'), tonkou: v('s-g3') }, gear: v('s-gear'), memo: v('s-memo'), updatedAt: Date.now(),
+      };
+      if (!data.name) { err.textContent = 'キャラクター名を入力してください。'; return; }
+      save.disabled = true;
+      try {
+        const sid = isNew ? (isEnemy ? 'e' : 's') + Date.now().toString(36) + Math.random().toString(36).slice(2, 6) : sheet.id;
+        const others = isEnemy ? (state.enemyItems || {}) : (state.sheetDocs.find((x) => x.id === state.uid)?.items || {});
+        if (JSON.stringify({ ...others, [sid]: data }).length > DOC_LIMIT) { err.textContent = '保存できる容量をこえました。画像を外すか、使わないキャラシを消してください。'; save.disabled = false; return; }
+        const ougiData = { name: ogv[0].name, effect: ogv[0].effect, skill: ogv[0].skill, note: ogv[0].note, name2: ogv[1].name, effect2: ogv[1].effect, skill2: ogv[1].skill, note2: ogv[1].note, name3: ogv[2].name, effect3: ogv[2].effect, skill3: ogv[2].skill, note3: ogv[2].note };
+        if (isEnemy) await saveEnemy(sid, { ...data, isEnemy: true, ougi: ougiData, params: paramRows.filter((r) => (r.k || '').trim() || (r.v || '').trim()).map((r) => ({ k: (r.k || '').trim(), v: (r.v || '').trim() })) });
+        else { await saveSheet(sid, data); await saveOugi(sid, ougiData); }
+        if (fullChanged) await saveFull(isEnemy ? 'enemy' : 'pc', isEnemy ? state.uid : state.uid, sid, portraitFull);
+        sdlg.close();
+      }
+      catch (e) { err.textContent = e.code === 'invalid_argument' ? '保存する権限がありません（閲覧のみのアカウントです）。' : `保存できませんでした（${e.code || 'error'}）。もう一度お試しください。`; save.disabled = false; }
+    } }, '保存');
+
+    let portrait = d.portrait || '', portraitFull = null, fullChanged = false;
+    let focus = d.focus ? { ...d.focus } : { x: 50, y: 25 };
+    const pvImg = h('img', { alt: 'イメージ画像', hidden: !portrait, src: portrait || undefined });
+    const pvMark = h('span', { class: 'focusmark', hidden: !portrait });
+    const showMark = () => { pvMark.style.left = focus.x + '%'; pvMark.style.top = focus.y + '%'; };
+    const pvWrap = h('div', { class: 'pvwrap', title: '顔の位置をクリックしてください' }, pvImg, pvMark);
+    pvWrap.addEventListener('click', (e) => {
+      const r = pvImg.getBoundingClientRect();
+      if (!r.width) return;
+      focus = { x: Math.max(0, Math.min(100, Math.round((e.clientX - r.left) / r.width * 100))), y: Math.max(0, Math.min(100, Math.round((e.clientY - r.top) / r.height * 100))) };
+      showMark();
+    });
+    showMark();
+    if (d.portrait && d.hasFull) loadFull(isEnemy ? 'enemy' : 'pc', isEnemy ? state.uid : (sheet.owner || state.uid), sheet.id).then((u) => { if (u && !portraitFull) pvImg.src = u; });
+    const pvFile = h('input', { type: 'file', id: 's-img', accept: 'image/*', hidden: true });
+    const pvMsg = h('div', { class: 'note' }, '画像は、一覧用の小さい版と、拡大用の大きい版（最大2000px）の2つを、自動で作って保存します。登録後、画像の「顔の位置」をクリックすると、丸や四角に切り抜かれたときも、顔が中に入ります。');
+    pvFile.addEventListener('change', async () => {
+      const f = pvFile.files?.[0];
+      if (!f) return;
+      try {
+        const r = await shrinkImage(f);
+        portrait = r.thumb; portraitFull = r.full; fullChanged = true;
+        pvImg.src = r.full; pvImg.hidden = false; pvMark.hidden = false; showMark();
+        pvMsg.textContent = `登録しました（一覧用 約${Math.round(r.thumb.length / 1000)}KB、拡大用 約${Math.round(r.full.length / 1000)}KB）。顔の位置をクリックしてください。`;
+      } catch (_) { pvMsg.textContent = 'この画像は読み込めませんでした。JPEG、PNGなどを選んでください。'; }
+      pvFile.value = '';
+    });
+    const portraitSec = h('div', { class: 'sec' }, h('h4', {}, 'イメージ画像（任意）'),
+      h('div', { class: 'portrait-box' }, pvWrap, h('div', { class: 'quick' },
+        h('button', { type: 'button', class: 'btn small', onclick: () => pvFile.click() }, '画像を選ぶ'),
+        h('button', { type: 'button', class: 'btn small', onclick: () => { portrait = ''; portraitFull = null; fullChanged = true; pvImg.hidden = true; pvMark.hidden = true; pvImg.removeAttribute('src'); pvMsg.textContent = '画像を外しました。'; } }, '画像を外す'), pvFile)),
+      pvMsg);
+    sbody.replaceChildren(
+      h('h3', {}, isEnemy ? (isNew ? 'エネミーを作る' : 'エネミーを編集') : (isNew ? 'キャラシを作る' : 'キャラシを編集')),
+      state.tokugi && state.tokugi.verified === false && h('div', { class: 'warn' }, '特技表は仮のデータです。ルルブと違う箇所があるかもしれません。'),
+      !fields.length && h('div', { class: 'warn' }, '特技表のデータが読み込めていません。特技は選べません。'),
+      h('div', { class: 'row' }, field('s-name', isEnemy ? 'エネミー名' : 'キャラクター名', inp('s-name', d.name, true)), field('s-player', isEnemy ? '分類（任意）' : 'プレイヤー名', inp('s-player', d.player))),
+      portraitSec,
+      isEnemy && h('datalist', { id: 'param-names' }, ['脅威度', '生命力', '攻撃', '備考'].map((x) => h('option', { value: x }))),
+      isEnemy && h('div', { class: 'warn' }, 'エネミーのデータは、あなた（GM）だけが見られます。階級ごとの上限は、かけていません。'),
+      isEnemy && h('div', { class: 'sec' }, h('h4', {}, 'パラメーター（GMだけが見られます）'), paramHost),
+      h('div', { class: 'row' }, field('s-ryuha', '流派', ryuhaSel), field('s-rank', '階級', rankInp)),
+      h('datalist', { id: 's-ranks' }, (state.ranks?.ranks?.map((r) => r.name) ?? RANK_HINTS).map((r) => h('option', { value: r }))),
+      h('div', { class: 'row' }, field('s-strength', '得意分野', strengthSel), field('s-belief', '信念', inp('s-belief', d.belief))),
+      h('div', { class: 'row' }, field('s-age', '年齢', inp('s-age', d.age)), field('s-gender', '性別', inp('s-gender', d.gender))),
+      h('div', { class: 'row' }, field('s-style', '流儀', inp('s-style', d.style)), field('s-face', '表の顔', inp('s-face', d.face))),
+      field('s-merit', '功績', inp('s-merit', d.merit)),
+      h('div', { class: 'sec' }, skillCount, skillHost),
+      ougiHost,
+      limitMsg,
+      h('div', { class: 'sec' }, ninpoHead, selHost,
+        h('div', { class: 'row' }, pickQ, pickR), pickHost),
+      field('s-bg', '背景', area('s-bg', d.background)),
+      h('div', { class: 'sec' }, h('h4', {}, '人物欄（居所・秘密・奥義は、獲得した情報にチェック）'), bondHost),
+      h('div', { class: 'sec' }, h('h4', {}, '忍具（所持数）'),
+        h('div', { class: 'gearrow' },
+          field('s-g1', '兵糧丸', h('input', { type: 'number', id: 's-g1', min: '0', max: '9', value: d.gearN?.hyoro ?? '' })),
+          field('s-g2', '神通丸', h('input', { type: 'number', id: 's-g2', min: '0', max: '9', value: d.gearN?.jinzu ?? '' })),
+          field('s-g3', '遁甲符', h('input', { type: 'number', id: 's-g3', min: '0', max: '9', value: d.gearN?.tonkou ?? '' })))),
+      field('s-gear', 'その他の忍具', area('s-gear', d.gear)),
+      field('s-memo', 'メモ', area('s-memo', d.memo)),
+      err,
+      h('div', { class: 'actions' },
+        h('div', {}, !isNew && del),
+        h('div', { class: 'right' }, h('button', { type: 'button', class: 'btn', onclick: () => sdlg.close() }, 'キャンセル'), save)));
+    rankInp.addEventListener('input', () => { renderCounts(); renderPick(); renderOugi(); });
+    renderSkills(); renderSel(); renderPick(); renderBonds(); renderOugi(); if (isEnemy) renderParams();
+    if (!sdlg.open) sdlg.showModal();
+  }
+
+  // ---------- rooms (ccfolia-like) ----------
+  const APP_URL = location.origin;
+  const ddlg = $('#ddlg');
+  const rdlg = $('#rdlg');
+  const CHUNK = 100;
+  const ROOM_COLORS = [['藍', '#2c4a8c'], ['紅', '#a4322f'], ['翠', '#2f6f57'], ['紫', '#6a4c93'], ['橙', '#b8621b'], ['墨', '#3a3f4b']];
+  const HENCHOU_DEFAULT = ['故障', 'マヒ', '重傷', '行方不明', '忘却', '呪い'];
+  const henchNames = () => HENCHOU_DEFAULT;
+  const slotFields = () => { const f = STRENGTH_NAMES(); return f.length ? f : ['器術', '体術', '忍術', '謀術', '戦術', '妖術']; };
+  const sessionById = (id) => state.sessions.find((x) => x.id === id);
+  const findSheet = (owner, id) => allSheets().find((s) => s.owner === owner && s.id === id);
+  const rand = (n) => { const a = new Uint32Array(1); crypto.getRandomValues(a); return (a[0] % n) + 1; };
+  const roomHash = () => { try { return decodeURIComponent((location.hash || '').replace(/^#/, '')); } catch (_) { return ''; } };
+  const myName = () => state.selfName || 'PL';
+
+  // 追加の生命力スロット: 頑健(1つ目+2、2つ目以降+1ずつ)、磐(+1)
+  const calcExtra = (sheet) => {
+    let k = 0, iwao = 0;
+    for (const id of sheet?.ninpoIds || []) {
+      const nm = ninpoById(id)?.name, c = sheet.ninpoCounts?.[id] || 1;
+      if (nm === '頑健') k += c;
+      if (nm === '磐') iwao += c;
+    }
+    return (k ? 2 + (k - 1) : 0) + iwao;
+  };
+
+  // ---- チャット（部屋ごとに独立。100件ずつのかたまりで保存）----
+  const chatMsgs = (sid) => Object.entries(state.chat[sid]?.chunks || {})
+    .flatMap(([cid, c]) => Object.entries(c.msgs || {}).map(([k, m]) => ({ k, cid, ...m })))
+    .sort((a, b) => a.t - b.t || (a.k < b.k ? -1 : 1));
+  async function sendChat(sid, m) {
+    const chunks = state.chat[sid]?.chunks || {};
+    const ids = Object.keys(chunks).sort();
+    let cur = ids[ids.length - 1];
+    if (!cur || Object.keys(chunks[cur].msgs || {}).length >= CHUNK) cur = 'c' + String(ids.length).padStart(4, '0');
+    const key = 'm' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
+    const ref = state.db.doc(`sessions/${sid}/chat/${cur}`);
+    const msg = { t: Date.now(), uid: state.uid || '', name: m.name || '', text: m.text || '', kind: m.kind || 'msg', ...(m.extra || {}) };
+    await (chunks[cur] ? ref.update({ msgs: { [key]: msg } }) : ref.set({ msgs: { [key]: msg } }));
+  }
+  const deleteMsg = (sid, m) => state.db.doc(`sessions/${sid}/chat/${m.cid}`).update({ msgs: { [m.k]: { __delete__: true } } });
+  async function clearChat(sid) {
+    for (const id of Object.keys(state.chat[sid]?.chunks || {})) await state.db.doc(`sessions/${sid}/chat/${id}`).delete();
+  }
+  async function sUpdate(sid, patch, text) {
+    if (patch && Object.keys(patch).length) await state.db.doc('sessions/' + sid).update(patch);
+  }
+
+  // ---- 判定 ----
+  // 目標値 = 5 + 習得特技から指定特技までのマス数。
+  //  ・上下左右に1マス動くと、1マス。
+  //  ・分野をまたぐときは、間の空きのマス（ギャップ）を通るので、1マス多く数える（合計2マス）。
+  //  ・ギャップは、器術の左と、各分野の間にある。妖術の右にはなく、器術の左と妖術の右はつながっているものとして数える。
+  //  ・得意分野の両隣のギャップは、なくなる（またぐときも1マス）。
+  //  ・生命力を失った分野の特技は使えない。
+  function targetFor(sheet, skill, filled) {
+    const fields = state.tokugi?.fields || [];
+    const n = fields.length;
+    const pos = new Map();
+    fields.forEach((f, c) => f.skills.forEach((k, r) => pos.set(k, [r, c])));
+    const goal = pos.get(skill);
+    if (!goal || !sheet) return null;
+    const dead = (c) => !!filled?.[fields[c]?.name];
+    if (dead(goal[1])) return { unusable: true };
+    const sIdx = fields.findIndex((f) => f.name === sheet.strength);
+    const gapOpen = (g) => !(sIdx >= 0 && (g === sIdx || g === sIdx + 1)); // g番目のギャップが残っているか
+    const key = (r, c) => r + ',' + c;
+    const dist = new Map();
+    const todo = [];
+    for (const k of new Set(sheet.skills || [])) { const p = pos.get(k); if (p && !dead(p[1])) { dist.set(key(...p), 0); todo.push([0, p[0], p[1]]); } }
+    while (todo.length) {
+      todo.sort((a, b) => a[0] - b[0]);
+      const [d, r, c] = todo.shift();
+      if (d > dist.get(key(r, c))) continue;
+      const nexts = [[r + 1, c, 1], [r - 1, c, 1]];
+      const right = (c + 1) % n, left = (c - 1 + n) % n;
+      nexts.push([r, right, 1 + (gapOpen(right) ? 1 : 0)]); // 右の分野へ（妖術の右は、器術の左のギャップにつながる）
+      nexts.push([r, left, 1 + (gapOpen(c) ? 1 : 0)]);      // 左の分野へ（この分野の左のギャップ）
+      for (const [nr, nc, w] of nexts) {
+        if (nr < 0 || nr >= (fields[nc]?.skills.length || 0) || dead(nc)) continue;
+        const nd = d + w;
+        if (!dist.has(key(nr, nc)) || nd < dist.get(key(nr, nc))) { dist.set(key(nr, nc), nd); todo.push([nd, nr, nc]); }
+      }
+    }
+    const d = dist.get(key(...goal));
+    return d === undefined ? { unusable: true } : { steps: d, target: 5 + d };
+  }
+  // 2D6の出目の印。ファンブル値以下ならファンブル、スペシャル値以上ならスペシャル
+  function flagOf(dice, special, fumble) {
+    const sum = dice[0] + dice[1];
+    if (sum <= fumble) return 'ファンブル';
+    if (sum >= special) return 'スペシャル';
+    return '';
+  }
+  function skillRoll(s, mode, skill) {
+    const pcs = Object.entries(s.pcs || {});
+    const known = new Set((state.tokugi?.fields || []).flatMap((f) => f.skills));
+    if (!known.has(skill)) return { err: `「${skill}」は特技表にありません。` };
+    const calc = ([pid, pc]) => ({ pid, pc, r: targetFor(findSheet(pc.ownerUid, pc.sheetId), skill, pc.filled) });
+    let pick;
+    const usable = (x) => x.r && x.r.target !== undefined;
+    if (mode === '最低') {
+      const list = pcs.map(calc).filter(usable);
+      if (list.length) {
+        const best = Math.min(...list.map((x) => x.r.target));
+        pick = list.find((x) => x.r.target === best);
+      } else {
+        // 誰も判定できないときも、自分のPCでダイスを振れる（スペシャルなら自動成功）
+        const mine = pcs.find(([, p]) => p.ownerUid === state.uid) || pcs[0];
+        if (!mine) return { err: '参加者がいません。' };
+        pick = calc(mine);
+      }
+    } else {
+      const mine = pcs.find(([, p]) => p.ownerUid === state.uid);
+      if (!mine) return { err: '参加していないので、自分の判定はできません。' };
+      pick = calc(mine);
+    }
+    const dice = [rand(6), rand(6)];
+    const flag = flagOf(dice, 12, battleFumble(s));
+    const sum = dice[0] + dice[1];
+    const can = usable(pick);
+    // 判定できない特技でも、スペシャル（自動成功）なら成功する。それ以外は失敗
+    const result = flag === 'スペシャル' ? '成功' : flag === 'ファンブル' ? '失敗' : (can && sum >= pick.r.target ? '成功' : '失敗');
+    return { roll: { who: pick.pc.name, skill, dice, sum, flag, target: can ? pick.r.target : null, op: '>=', result, unusable: !can } };
+  }
+  // チャットのコマンド。文字列（結果）／{err}／null（ふつうの発言）を返す
+  function chatCommand(t, s) {
+    let m = t.match(/^\/?(?:判定|sg)\s+(\S+)(?:\s+(最低))?$/i);
+    if (m) return skillRoll(s, m[2] || '', m[1]);
+    m = t.match(/^\/?(\d*)d(\d+)(?:\s*(>=|<=|>|<|=)\s*(\d+))?(?:\s+s(\d+))?(?:\s+f(\d+))?$/i);
+    if (!m) return null;
+    const n = Math.min(20, Math.max(1, parseInt(m[1] || '1', 10))), sd = Math.min(1000, Math.max(2, parseInt(m[2], 10)));
+    const r = Array.from({ length: n }, () => rand(sd));
+    const sum = r.reduce((a, b) => a + b, 0);
+    const flag = n === 2 && sd === 6 ? flagOf([r[0], r[1]], m[5] !== undefined ? parseInt(m[5], 10) : 12, m[6] !== undefined ? parseInt(m[6], 10) : battleFumble(s)) : '';
+    let target = null, op = '', result = '';
+    if (m[3]) {
+      target = parseInt(m[4], 10); op = m[3];
+      const ok = { '>=': sum >= target, '<=': sum <= target, '>': sum > target, '<': sum < target, '=': sum === target }[op];
+      result = flag === 'スペシャル' ? '成功' : flag === 'ファンブル' ? '失敗' : (ok ? '成功' : '失敗');
+    }
+    return { roll: { who: null, skill: '', label: `${n}D${sd}`, dice: r, sum, flag, target, op, result } };
+  }
+
+  // ---- 部屋一覧 ----
+  function renderSessions() {
+    const host = $('#sess-body');
+    $('#sess-new').hidden = !canEditSheets();
+    if (!state.ready.sessions) { host.replaceChildren(h('div', { class: 'none' }, '読み込み中…')); return; }
+    const s = state.sessId ? sessionById(state.sessId) : null;
+    if (state.sessId && !s) state.sessId = null;
+    document.querySelector('.wrap').classList.toggle('wide', !!s && state.view === 'session');
+    $('#sess-head').hidden = !!s;
+    if (!s) { leaveRoomUI(); renderSessionList(host); return; }
+    if (!state.roomUI || state.roomUI.sid !== s.id) buildRoom(host, s);
+    updateRoom(s);
+  }
+  function renderSessionList(host) {
+    const list = [...state.sessions].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+    host.replaceChildren(
+      h('div', { class: 'sheet-sec' }, h('h2', { class: 'sec-title' }, '部屋の一覧'),
+        list.length ? h('div', { class: 'grid' }, list.map((s) => h('article', { class: 'card' },
+          h('h2', {}, s.name || '（名前なし）'),
+          h('dl', { class: 'facts' }, fact('GM', ownerName(s.gmUid)), fact('参加PC', `${Object.keys(s.pcs || {}).length}人`)),
+          h('div', { class: 'card-foot' }, h('span', { class: 'page' }, s.createdAt ? new Date(s.createdAt).toLocaleDateString('ja-JP') : ''),
+            h('span', { class: 'row-btns' }, h('button', { class: 'btn small', onclick: () => copyText(`${APP_URL}#${s.id}`, '部屋のURLをコピーしました') }, 'URL'),
+              h('button', { class: 'btn small primary', onclick: () => enterRoom(s.id) }, '入室')))))) : h('div', { class: 'none' }, canEditSheets() ? '上の欄に名前を入れて「＋ 部屋を作る」を押してください。' : 'まだ部屋がありません。')));
+  }
+  async function copyText(text, ok) {
+    try { await navigator.clipboard.writeText(text); toast(ok); } catch (_) { toast(text); }
+  }
+  const toast = (t) => { const el = $('#toast'); el.textContent = t; el.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => { el.hidden = true; }, 3500); };
+  function enterRoom(id) {
+    state.sessId = id;
+    try { location.hash = id; } catch (_) { /* 埋め込み表示では変えられない */ }
+    renderSessions();
+  }
+  function leaveRoomUI() {
+    if (state.chatUnsub) { state.chatUnsub(); state.chatUnsub = null; }
+    state.roomUI = null;
+  }
+
+  // ---- 部屋の画面（1画面にまとめる）----
+  function buildRoom(host, s) {
+    leaveRoomUI();
+    const ui = { sid: s.id };
+    ui.title = h('div', { class: 'bn-title' });
+    ui.memo = h('div', { class: 'bn-memo' });
+    ui.settingsBtn = h('button', { class: 'btn small', onclick: () => openRoomSettings(sessionById(ui.sid)) }, '設定');
+    const setPhase = (battle) => {
+      const cur = sessionById(ui.sid);
+      if (!cur || cur.gmUid !== state.uid || !!cur.battle === battle) return;
+      // 戦闘シーンを始めるたびに、プロットは1ラウンド目からやり直す
+      sUpdate(cur.id, battle ? { battle: true, plot: { round: 1, revealed: false, vals: { __delete__: true } } } : { battle: false });
+    };
+    ui.btnMain = h('button', { type: 'button', class: 'segbtn', onclick: () => setPhase(false) }, 'メインフェイズ');
+    ui.btnBattle = h('button', { type: 'button', class: 'segbtn', onclick: () => setPhase(true) }, '戦闘シーン');
+    ui.seg = h('div', { class: 'seg', role: 'group', 'aria-label': '盤面の切り替え' }, ui.btnMain, ui.btnBattle);
+    ui.side = h('div', { class: 'rside' });
+    ui.plot = h('div', { class: 'plotboard' });
+    ui.clearBtn = h('button', { type: 'button', class: 'btn small danger', onclick: async (e) => {
+      const b = e.currentTarget;
+      if (b.dataset.armed !== '1') { b.dataset.armed = '1'; b.textContent = '本当に全削除'; clearTimeout(b.tm); b.tm = setTimeout(() => { b.dataset.armed = ''; b.textContent = 'ログを全削除'; }, 4000); return; }
+      b.dataset.armed = ''; b.textContent = 'ログを全削除';
+      try { await clearChat(ui.sid); } catch (err) { toast(`削除できませんでした（${err.code || 'error'}）`); }
+    } }, 'ログを全削除');
+    ui.log = h('div', { class: 'chatlog', role: 'log', 'aria-live': 'polite' });
+    ui.err = h('div', { class: 'err', role: 'alert' });
+    ui.input = h('input', { type: 'text', id: 'chat-in', placeholder: '発言　／　2d6　／　2d6>=6　／　判定 水術', autocomplete: 'off', enterkeyhint: 'send' });
+    ui.skill = h('select', { id: 'chat-skill', 'aria-label': '指定特技' });
+    ui.form = h('form', { class: 'chatform' },
+      h('div', { class: 'quick' }, ui.skill,
+        h('button', { type: 'button', class: 'btn small', onclick: () => quickSkill('') }, '自分で判定'),
+        h('button', { type: 'button', class: 'btn small', onclick: () => quickSkill('最低') }, '最も低い人で判定'),
+        h('button', { type: 'button', class: 'btn small', onclick: () => { ui.input.value = '2d6'; submit(); } }, '2D6'),
+        h('button', { type: 'button', class: 'btn small', onclick: () => { ui.input.value = '1d6'; submit(); } }, '1D6')),
+      h('div', { class: 'sendrow' }, ui.input, h('button', { type: 'submit', class: 'btn primary' }, '送信')),
+      ui.err,
+      h('details', { class: 'helpbox' }, h('summary', {}, 'コマンドの使い方'),
+        h('div', {}, '2d6 … 6面ダイスを2個。 5d6、1d100 なども使えます。'),
+        h('div', {}, '2d6>=7 … 目標値つき。成功・失敗も出ます（>=、<=、>、<、= が使えます）。'),
+        h('div', {}, '2d6>=7 s11 f3 … スペシャル値を11、ファンブル値を3にします（初期値は12と2）。戦闘シーン中は、ファンブル値が自分のプロット値になります。'),
+        h('div', {}, '判定 水術 … 自分のPCで、指定特技の目標値を計算して振ります。判定できない特技でも振れます（スペシャルなら自動成功）。'),
+        h('div', {}, '判定 水術 最低 … 参加者のうち、目標値が最も低い人で振ります。')));
+    const submit = async () => {
+      const cur = sessionById(ui.sid);
+      const t = ui.input.value.trim();
+      if (!t || !cur) return;
+      ui.err.textContent = '';
+      const mine = Object.values(cur.pcs || {}).find((p) => p.ownerUid === state.uid);
+      const who = mine?.name || myName();
+      const r = chatCommand(t, cur);
+      try {
+        if (r?.err) { ui.err.textContent = r.err; return; }
+        ui.input.value = '';
+        await sendChat(cur.id, r ? { kind: 'roll', name: r.roll.who || who, extra: { skill: r.roll.skill, label: r.roll.label || '', dice: r.roll.dice, sum: r.roll.sum, flag: r.roll.flag, target: r.roll.target ?? null, op: r.roll.op || '', result: r.roll.result || '', unusable: !!r.roll.unusable } } : { kind: 'msg', name: who, text: t });
+      } catch (e) { ui.err.textContent = `送信できませんでした（${e.code || 'error'}）`; }
+    };
+    const quickSkill = async (mode) => {
+      const cur = sessionById(ui.sid);
+      if (!ui.skill.value) { ui.err.textContent = '指定特技を選んでください。'; return; }
+      ui.input.value = `判定 ${ui.skill.value}${mode ? ' ' + mode : ''}`; await submit();
+    };
+    ui.form.addEventListener('submit', (e) => { e.preventDefault(); submit(); });
+    ui.grid = h('div', { class: 'roomgrid' }, ui.side, ui.plot, h('div', { class: 'chatcol' }, h('div', { class: 'chathead' }, h('strong', {}, 'チャット'), ui.clearBtn), ui.log, ui.form));
+    ui.stage = h('div', { class: 'stage' }, ui.grid);
+    ui.root = h('div', { class: 'room' },
+      h('div', { class: 'roomtop' },
+        h('button', { class: 'btn small', onclick: () => { state.sessId = null; try { location.hash = ''; } catch (_) { /* noop */ } renderSessions(); } }, '← 部屋の一覧'),
+        h('div', { class: 'grow' }, ui.title, ui.memo), ui.seg,
+        h('button', { class: 'btn small', onclick: () => copyText(`${APP_URL}#${ui.sid}`, '部屋のURLをコピーしました') }, 'URLをコピー'), ui.settingsBtn),
+      ui.stage);
+    state.roomUI = ui;
+    host.replaceChildren(ui.root);
+    state.chatUnsub = state.db.doc('sessions/' + s.id).collection('chat').onSnapshot((snap) => {
+      state.chat[s.id] = { chunks: Object.fromEntries(snap.docs.map((d) => [d.id, d.data()])) };
+      updateChat();
+    }, () => {});
+  }
+
+  function updateChat() {
+    const ui = state.roomUI;
+    if (!ui) return;
+    const near = ui.log.scrollHeight - ui.log.scrollTop - ui.log.clientHeight < 80;
+    const msgs = chatMsgs(ui.sid).slice(-300);
+    const gm = sessionById(ui.sid)?.gmUid === state.uid;
+    const del = (m) => ((gm || (m.uid && m.uid === state.uid)) ? h('button', { type: 'button', class: 'msgdel', title: 'この発言を削除', 'aria-label': 'この発言を削除', onclick: () => deleteMsg(ui.sid, m).catch((e) => toast(`削除できませんでした（${e.code || 'error'}）`)) }, '×') : null);
+    ui.clearBtn.hidden = !gm;
+    ui.log.replaceChildren(...msgs.map((m) => h('div', { class: `msg ${m.kind}` },
+      m.kind === 'sys' ? h('span', { class: 'sysmsg' }, m.text, del(m))
+        : m.kind === 'roll' && m.dice
+          ? [h('span', { class: 'who' }, m.name || 'PL'), m.skill && h('span', { class: 'skname' }, `【${m.skill}】`), h('span', { class: 'dicenums' }, `${m.label ? m.label + ' ' : ''}${m.dice.join(' + ')}${m.dice.length > 1 ? ' = ' + m.sum : ''}`), (m.target !== null && m.target !== undefined) && h('span', { class: 'tgt' }, `目標${m.op && m.op !== '>=' ? m.op : ''}${m.target}`), m.unusable && h('span', { class: 'tgt' }, '判定不可（スペシャルのみ成功）'), m.flag && h('span', { class: 'flag ' + (m.flag === 'ファンブル' ? 'fb' : 'sp') }, m.flag), m.result && h('span', { class: 'flag ' + (m.result === '成功' ? 'ok' : 'ng') }, m.result), del(m)]
+          : [h('span', { class: 'who' }, m.name || 'PL'), h('span', { class: 'time' }, new Date(m.t).toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' })), del(m), h('div', { class: 'body' + (m.kind === 'roll' ? ' dice' : '') }, m.text)])));
+    if (!msgs.length) ui.log.append(h('div', { class: 'note' }, 'まだ発言がありません。'));
+    if (near) ui.log.scrollTop = ui.log.scrollHeight;
+  }
+
+  function applyBackground(ui, s) {
+    const color = s.bg?.color || ROOM_COLORS[0][1];
+    ui.root.style.setProperty('--room', color);
+    const img = s.bg?.imageId;
+    ui.stage.style.backgroundImage = img ? `linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url("/_blob/${encodeURIComponent(img)}")` : '';
+    ui.stage.classList.toggle('hasimg', !!img);
+  }
+
+  function updateRoom(s) {
+    const ui = state.roomUI;
+    ui.title.textContent = s.bg?.title ? `${s.name}　／　${s.bg.title}` : (s.name || 'セッション');
+    ui.memo.textContent = s.bg?.memo || '';
+    ui.settingsBtn.hidden = s.gmUid !== state.uid;
+    ui.btnMain.setAttribute('aria-pressed', String(!s.battle));
+    ui.btnBattle.setAttribute('aria-pressed', String(!!s.battle));
+    ui.btnMain.disabled = ui.btnBattle.disabled = s.gmUid !== state.uid;
+    ui.btnMain.title = ui.btnBattle.title = s.gmUid === state.uid ? '盤面を切り替える' : 'GMだけが切り替えられます';
+    applyBackground(ui, s);
+    const skills = (state.tokugi?.fields || []).flatMap((f) => f.skills);
+    if (ui.skill.options.length !== skills.length + 1) {
+      const keep = ui.skill.value;
+      ui.skill.replaceChildren(h('option', { value: '' }, '指定特技…'), ...skills.map((k) => h('option', { value: k }, k)));
+      ui.skill.value = keep;
+    }
+    updateSide(s);
+    updateCenter(s);
+    updateChat();
+  }
+
+
+  // ---- メインフェイズの盤（公式の「プレイサマリー」の表）----
+  const M_TABS = [['proc', '手順'], ['scene', 'シーン表'], ['feel', '感情表'], ['hench', '変調表'], ['fumble', 'ファンブル表'], ['ryuha', '流派相関']];
+  const SCENE_T = [
+    [2, '血の匂いが充満している。戦いの気配が残る。'], [3, '夢のような、終わったはずの過去。'], [4, '眼下に街並みが広がる。'], [5, '世界の終わりのような暗闇。密やかな囁き。'],
+    [6, '優しい時間。影の世界を忘れそうになる。'], [7, '清廉な森。鳥のさえずりと風の音。'], [8, '凄まじい人混みと喧噪。'], [9, '強い雨が降り出す。'],
+    [10, '大きな風が吹き荒ぶ。何かが起こりそうな予感。'], [11, '酔っぱらいの怒号、客引きの声。繁華街。'], [12, '太陽の微笑みに包まれる。まぶしすぎる。'],
+  ];
+  const FEEL_T = [[1, '共感', '不信'], [2, '友情', '怒り'], [3, '愛情', '妬み'], [4, '忠誠', '侮蔑'], [5, '憧憬', '劣等感'], [6, '狂信', '殺意']];
+  const HENCH_T = [
+    [1, '故障', 'すべての忍具が使えなくなる（累積しない）。サイクル終了時に《絡繰術》で判定し、成功で無効化。'],
+    [2, 'マヒ', '習得特技からランダムに1つが使用不能になる（習得特技の数だけ累積）。サイクル終了時に《身体操術》で判定し、成功ですべて無効化。'],
+    [3, '重傷', '命中・情報・感情判定のたびに接近戦ダメージ1点（累積しない）。サイクル終了時に《生存術》で判定し、成功で無効化。'],
+    [4, '行方不明', 'メインフェイズ中、自分以外がシーンプレイヤーのシーンに登場できない（累積しない）。サイクル終了時に《経済力》で判定し、成功で無効化。'],
+    [5, '忘却', '習得している感情からランダムに1つを、持っていないものとして扱う（感情の数だけ累積）。サイクル終了時に《記憶術》で判定し、成功ですべて無効化。'],
+    [6, '呪い', '習得している忍法からランダムに1つを、修得していないものとして扱う（忍法の数だけ累積）。サイクル終了時に《呪術》で判定し、成功ですべて無効化。'],
+  ];
+  const FUMBLE_T = [
+    [1, '調子がおかしい。そのサイクルの間、すべての行為判定に-1。'], [2, '好きな忍具を1つ失う。'],
+    [3, '情報が漏れる。ほかのキャラが、自分の秘密か居所から好きなものを1つずつ知れる。'], [4, '油断。術の制御に失敗し、好きな生命力を1点失う。'],
+    [5, '敵の陰謀。罠にかかり、ランダムな変調1つを受ける（変調表で決める）。'], [6, '何も起こらない。'],
+  ];
+  const RYUHA_T = [
+    ['比良坂機関', '日本の国益を守る'], ['私立御斎学園', '妖魔の力で苦しむ者を助ける'], ['隠忍の血統', '妖魔の力を利用して世界に変革をもたらす'],
+    ['ハグレモノ', '誰にも縛られず、自分の意志で戦う'], ['鞍馬神流', '妖魔や忍びの手から表の世界を守る'], ['斜歯忍軍', '新たな忍法開発のため、妖魔の謎を解き明かす'],
+  ];
+  function henchBlock(s) {
+    const tb = s.tables || {};
+    return h('div', { class: 'sec' },
+      h('div', { class: 'quick' },
+        h('button', { type: 'button', class: 'btn small primary', onclick: () => sUpdate(s.id, { tables: { hench: rand(6) } }) }, '変調表を振る（1D6）'),
+        tb.hench !== undefined && h('button', { type: 'button', class: 'btn small', onclick: () => sUpdate(s.id, { tables: { hench: { __delete__: true } } }) }, '結果を消す'),
+        tb.hench !== undefined && h('strong', {}, `出目 ${tb.hench}`)),
+      h('div', { class: 'tlist' }, HENCH_T.map(([n, nm, t]) => h('div', { class: 'trow' + (tb.hench === n ? ' hit' : '') }, h('b', {}, String(n)), h('span', {}, h('strong', {}, nm + '　'), t)))));
+  }
+  function updateMain(s) {
+    const ui = state.roomUI;
+    const tab = state.mtab || 'proc';
+    const tb = s.tables || {};
+    const rollBtn = (key, label, roll) => h('div', { class: 'quick' },
+      h('button', { type: 'button', class: 'btn small primary', onclick: () => sUpdate(s.id, { tables: { [key]: roll() } }) }, label),
+      tb[key] !== undefined && h('button', { type: 'button', class: 'btn small', onclick: () => sUpdate(s.id, { tables: { [key]: { __delete__: true } } }) }, '結果を消す'),
+      tb[key] !== undefined && h('strong', {}, `出目 ${tb[key]}`));
+    const row = (hit, ...kids) => h('div', { class: 'trow' + (hit ? ' hit' : '') }, ...kids);
+    const body = {
+      proc: () => h('div', { class: 'sec' },
+        h('div', { class: 'panel' }, h('strong', {}, 'ドラマシーンの手順'),
+          h('ol', { class: 'steps' },
+            h('li', {}, 'シーンプレイヤーがシーン表を振る。'), h('li', {}, '登場人物と時制を選び、シーンを演出する。'),
+            h('li', {}, '回復判定・情報判定・感情判定のうち1つを選ぶ。'), h('li', {}, '演出にふさわしい特技を1つ選び、行為判定を行う。')),
+          h('div', { class: 'note' }, '成功したとき　回復判定: 自分の生命力1点か変調1つを回復。　情報判定: 好きなキャラの居所か秘密を1つ獲得。　感情判定: 同じシーンの好きなキャラ1人と、互いに1D6を振り、相手への感情をランダムに獲得（すでにあれば変更してもよい）。')),
+        h('div', { class: 'panel' }, h('strong', {}, '戦闘シーンの手順'),
+          h('ol', { class: 'steps' }, h('li', {}, 'シーンプレイヤーは戦場表を振って戦場を決められる。'), h('li', {}, 'プロット。'), h('li', {}, '攻撃の処理。'), h('li', {}, 'ラウンドの終了。')),
+          h('div', { class: 'note' }, '勝利したとき　感情: 敗者1人を選び、その人への好きな感情を獲得する（または、相手に自分への好きな感情を獲得させる）。　情報: 敗者1人の居所か秘密を獲得。　プライズ: 敗者1人のプライズを1つ獲得。')),
+        h('div', { class: 'note' }, 'ドラマシーン中は、同じシーンのキャラと、忍具・居所・奥義の譲渡や交換をしてもよい。判定するキャラに感情を持っていれば、感情修正をつけられる（1サイクルに1度）。')),
+      scene: () => h('div', { class: 'sec' }, rollBtn('scene', 'シーン表を振る（2D6）', () => rand(6) + rand(6)),
+        h('div', { class: 'tlist' }, SCENE_T.map(([n, t]) => row(tb.scene === n, h('b', {}, String(n)), h('span', {}, t))))),
+      feel: () => h('div', { class: 'sec' }, rollBtn('feel', '感情表を振る（1D6）', () => rand(6)),
+        h('div', { class: 'tlist' }, FEEL_T.map(([n, p, m]) => row(tb.feel === n, h('b', {}, String(n)), h('span', {}, `${p}（プラス）／${m}（マイナス）`))))),
+      hench: () => henchBlock(s),
+      fumble: () => h('div', { class: 'sec' }, rollBtn('fumble', 'ファンブル表を振る（1D6）', () => rand(6)),
+        h('div', { class: 'tlist' }, FUMBLE_T.map(([n, t]) => row(tb.fumble === n, h('b', {}, String(n)), h('span', {}, t))))),
+      ryuha: () => h('div', { class: 'sec' },
+        h('div', { class: 'note' }, '比良坂機関と私立御斎学園、鞍馬神流と斜歯忍軍は、それぞれ「仇敵」の関係です。'),
+        h('div', { class: 'tlist' }, RYUHA_T.map(([n, t]) => row(false, h('b', { class: 'wide' }, n), h('span', {}, t)))),
+        h('div', { class: 'note' }, '感情を持っている相手には、「情報共有」「戦闘乱入」「感情修正」ができます。')),
+    }[tab]();
+    ui.plot.replaceChildren(h('div', { class: 'panel' }, h('strong', {}, 'メインフェイズ'),
+      h('nav', { class: 'mtabs' }, M_TABS.map(([k, lab]) => h('button', { type: 'button', class: 'mtab', 'aria-pressed': String(tab === k), onclick: () => { state.mtab = k; updateMain(sessionById(s.id)); } }, lab)))),
+      h('div', { class: 'panel' }, body));
+  }
+  function updateCenter(s) { if (s.battle) updatePlot(s); else updateMain(s); }
+
+  // ---- プロット置き場（公式の「ヴェロシティ・システム」の表に合わせた盤）----
+  // ラウンドの初めにGMが「次のラウンド」→ 非公開・入力クリア。PLとGM(エネミー)が置き終えたら、GMが「全体公開」。
+  const VEL = [
+    ['零', 'Mundain', '静止した時間', '◆'], ['壱', 'Ghost Walk', '幽霊歩き', '⚀'], ['弐', 'Shadow Run', '影走', '⚁'], ['参', 'Neuro Speed', '思考速度', '⚂'],
+    ['肆', 'Sonic Speed', '音速', '⚃'], ['伍', 'Bullet Speed', '弾速', '⚄'], ['陸', 'Light Speed', '光速', '⚅'], ['死地', 'F.T.L.', '超光速', '★'],
+  ];
+  const FIELDS = [
+    ['平地', '特になし。'], ['水中', '回避判定に-2の修正。'], ['高所', 'ファンブルすると接近戦ダメージ1点。'],
+    ['悪天候', 'すべての攻撃忍法の間合が1上がる。'], ['雑踏', '行為判定のファンブル値が1上がる。'],
+    ['極地', 'GMがラウンド終了時に1D6を振り、戦闘開始からの経過ラウンド以下なら、この戦場にいる者は接近戦ダメージ1点。脱落した者は1D6で変調表を適用。'],
+  ];
+  // 戦闘シーン中は、2D6がプロット値以下でファンブル（雑踏では+1）
+  const battleFumble = (s) => {
+    if (!s?.battle) return 2;
+    const mine = Object.entries(s.pcs || {}).find(([, p]) => p.ownerUid === state.uid);
+    const v = mine ? s.plot?.vals?.[mine[0]] : undefined;
+    return v === undefined ? 2 : v + (s.field === 5 ? 1 : 0);
+  };
+  function updatePlot(s) {
+    const ui = state.roomUI;
+    const gm = s.gmUid === state.uid;
+    const pl = s.plot || {};
+    const round = pl.round || 1, revealed = !!pl.revealed, vals = pl.vals || {};
+    const entries = [
+      ...Object.entries(s.pcs || {}).map(([id, pc]) => ({ id, name: pc.name, kind: 'pc', owner: pc.ownerUid, img: findSheet(pc.ownerUid, pc.sheetId)?.portrait, imgFocus: findSheet(pc.ownerUid, pc.sheetId)?.focus, imgFull: findSheet(pc.ownerUid, pc.sheetId)?.hasFull ? { kind: 'pc', owner: pc.ownerUid, id: pc.sheetId } : null })),
+      ...Object.entries(s.enemies || {}).map(([id, e]) => ({ id, name: e.name, kind: 'enemy', src: e.src, img: e.img, imgFocus: e.focus, imgFull: e.imgId ? { kind: 'pub', owner: '', id: e.imgId } : null })),
+    ];
+    const canEdit = (e) => !revealed && (e.kind === 'pc' ? (e.owner === state.uid || gm) : gm);
+    const seeVal = (e) => revealed || (e.kind === 'pc' ? e.owner === state.uid : gm);
+    if (state.plotWant && entries.some((e) => e.id === state.plotWant)) { state.plotArm = state.plotWant; state.plotWant = null; }
+    if (!entries.some((e) => e.id === state.plotArm && canEdit(e))) state.plotArm = entries.find(canEdit)?.id || null;
+    const set = entries.filter((e) => vals[e.id] !== undefined).length;
+    const armed = entries.find((e) => e.id === state.plotArm);
+    const place = (i) => {
+      if (!armed || !canEdit(armed)) return;
+      sUpdate(s.id, { plot: { vals: { [armed.id]: vals[armed.id] === i ? { __delete__: true } : i } } });
+    };
+    const enemyIn = h('input', { type: 'text', id: 'enemy-name', placeholder: 'エネミー名', autocomplete: 'off' });
+    const addEnemy = async () => {
+      const name = enemyIn.value.trim();
+      if (!name) return;
+      const id = 'e' + Date.now().toString(36) + Math.random().toString(36).slice(2, 4);
+      enemyIn.value = '';
+      state.plotWant = id;
+      await sUpdate(s.id, { enemies: { [id]: { name } } }, `エネミー「${name}」を配置しました`);
+    };
+    const enemySel = h('select', { 'aria-label': 'エネミーのデータ' }, ...enemyList().map((x) => h('option', { value: x.id }, x.name)));
+    const addFromData = async () => {
+      const rec = enemyList().find((x) => x.id === enemySel.value);
+      if (!rec) return;
+      const id = 'e' + Date.now().toString(36) + Math.random().toString(36).slice(2, 4);
+      state.plotWant = id;
+      await sUpdate(s.id, { enemies: { [id]: { name: rec.name, src: rec.id } } });
+    };
+    enemyIn.addEventListener('keydown', (ev) => { if (ev.key === 'Enter') { ev.preventDefault(); addEnemy(); } });
+    const tokens = (i) => entries.filter((e) => vals[e.id] === i && seeVal(e)).map((e) => h('span', { class: 'vtoken' + (e.kind === 'enemy' ? ' enemy' : '') + (e.id === state.plotArm ? ' armed' : '') }, e.img && portraitEl({ thumb: e.img, focus: e.imgFocus, full: e.imgFull, cls: 'avatar xs', alt: e.name }), e.name));
+    const board = h('div', { class: 'velocity' }, VEL.map(([kj, en, jp, pip], i) => h('button', {
+      type: 'button', class: 'vcol' + (i === 0 || i === 7 ? ' dark' : ''), disabled: !armed || !canEdit(armed),
+      title: armed ? `${armed.name}を「${i}」に置く（もう一度押すと取り消し）` : '置く対象がありません', 'aria-label': `プロット値${i} ${jp}`, onclick: () => place(i),
+    },
+      h('span', { class: 'vkanji' }, kj), h('span', { class: 'ven' }, en), h('span', { class: 'vjp' }, jp), h('span', { class: 'vpip' }, pip), h('span', { class: 'vnum' }, String(i)),
+      h('span', { class: 'vtokens' }, ...tokens(i)),
+      h('span', { class: 'vfumble' }, `ファンブルエリア ${i}`))));
+    const chips = entries.map((e) => h('span', { class: 'echip' + (e.id === state.plotArm ? ' on' : '') },
+      h('button', { type: 'button', class: 'echipbtn', disabled: !canEdit(e), 'aria-pressed': String(e.id === state.plotArm), onclick: () => { state.plotArm = e.id; updatePlot(sessionById(s.id)); } },
+        e.img && portraitEl({ thumb: e.img, focus: e.imgFocus, full: e.imgFull, cls: 'avatar sm', alt: e.name }), e.name, e.kind === 'enemy' && h('span', { class: 'badge plain' }, 'エネミー'),
+        h('span', { class: 'note' }, vals[e.id] === undefined ? '未' : (seeVal(e) ? String(vals[e.id]) : '済'))),
+      e.kind === 'enemy' && gm && e.src && enemyList().find((x) => x.id === e.src)?.portrait && h('button', { type: 'button', class: 'btn small', title: 'この画像を、全員に見せる／隠す', onclick: async () => {
+        const rec = enemyList().find((x) => x.id === e.src);
+        const pubId = 'pub_' + s.id + '_' + e.id;
+        if (e.img) {
+          await sUpdate(s.id, { enemies: { [e.id]: { img: { __delete__: true }, imgId: { __delete__: true }, focus: { __delete__: true } } } });
+          await saveFull('pub', state.uid, pubId, null);
+        } else {
+          const url = rec.hasFull ? await loadFull('enemy', state.uid, rec.id) : null;
+          if (url) await saveFull('pub', state.uid, pubId, url);
+          await sUpdate(s.id, { enemies: { [e.id]: { img: rec.portrait, focus: rec.focus || { x: 50, y: 25 }, ...(url ? { imgId: pubId } : {}) } } });
+        }
+      } }, e.img ? '画像を隠す' : '画像を出す'),
+      e.kind === 'enemy' && gm && e.src && enemyList().some((x) => x.id === e.src) && h('button', { type: 'button', class: 'btn small', 'aria-label': `${e.name}のデータを見る`, title: 'エネミーのデータ（GMだけ）', onclick: () => openSheetView(enemyList().find((x) => x.id === e.src)) }, '詳細'),
+      e.kind === 'enemy' && gm && h('button', { type: 'button', class: 'btn small', 'aria-label': `${e.name}を外す`, title: 'エネミーを外す', onclick: () => sUpdate(s.id, { enemies: { [e.id]: { __delete__: true } }, plot: { vals: { [e.id]: { __delete__: true } } } }, `エネミー「${e.name}」を外しました`) }, '×')));
+    const groups = [];
+    if (revealed) for (const e of entries.filter((x) => vals[x.id] !== undefined).sort((a, b) => vals[b.id] - vals[a.id])) {
+      const last = groups[groups.length - 1];
+      if (last && last.v === vals[e.id]) last.list.push(e); else groups.push({ v: vals[e.id], list: [e] });
+    }
+    const fieldSel = h('select', { 'aria-label': '戦場', disabled: !gm }, h('option', { value: '0' }, '未設定'), ...FIELDS.map(([n], i) => h('option', { value: String(i + 1) }, `${i + 1} ${n}`)));
+    fieldSel.value = String(s.field || 0);
+    fieldSel.addEventListener('change', () => sUpdate(s.id, { field: Number(fieldSel.value) }, Number(fieldSel.value) ? `戦場: ${fieldSel.value} ${FIELDS[fieldSel.value - 1][0]}` : ''));
+    ui.plot.replaceChildren(...[
+      h('div', { class: 'panel plotpanel' },
+        h('div', { class: 'quick' }, h('strong', {}, `プロット置き場　ラウンド ${round}`), h('span', { class: 'badge ' + (revealed ? '' : 'sample') }, revealed ? '公開中' : '非公開'),
+          s.battle && h('span', { class: 'badge sample' }, '戦闘シーン')),
+        h('span', { class: 'note' }, revealed ? '全員のプロットが見えています。値の高い順が手番です。' : `置いた数 ${set} / ${entries.length}　公開まで、ほかの人の位置は見えません。`),
+        h('span', { class: 'note' }, armed && canEdit(armed) ? `「${armed.name}」を置く場所を、下の盤から選んでください。` : (revealed ? '公開中は動かせません。' : '')),
+        gm && h('div', { class: 'quick' },
+          h('button', { type: 'button', class: 'btn small primary', onclick: () => sUpdate(s.id, { plot: { revealed: !revealed } }, revealed ? 'プロットを非公開にしました' : `ラウンド${round}のプロットを全体公開しました`) }, revealed ? '非公開に戻す' : '全体公開'),
+          h('button', { type: 'button', class: 'btn small', onclick: () => sUpdate(s.id, { plot: { round: round + 1, revealed: false, vals: { __delete__: true } } }, `ラウンド${round + 1}に進みました（プロットを非公開にしました）`) }, '次のラウンドへ')),
+        gm && h('div', { class: 'quick' }, enemyIn, h('button', { type: 'button', class: 'btn small', onclick: addEnemy }, '＋ エネミーを配置')),
+        gm && enemyList().length ? h('div', { class: 'quick' }, enemySel, h('button', { type: 'button', class: 'btn small', onclick: addFromData }, 'データから配置')) : null),
+      h('div', { class: 'echips' }, ...chips),
+      board,
+      revealed && groups.length ? h('div', { class: 'panel' }, h('strong', {}, '手番の順'),
+        h('ol', { class: 'plotorder' }, groups.map((g) => h('li', {}, `${g.v}　${g.list.map((e) => e.name).join('、')}${g.list.length > 1 ? '（同時）' : ''}`)))) : null,
+      h('details', { class: 'panel', open: state.fOpen ?? !!s.field, ontoggle: (e) => { state.fOpen = e.target.open; } },
+        h('summary', {}, h('strong', {}, '戦場表'), s.field ? h('span', { class: 'badge' }, `${s.field} ${FIELDS[s.field - 1][0]}`) : ''),
+        gm && h('div', { class: 'quick' }, fieldSel, h('button', { type: 'button', class: 'btn small', onclick: () => { const n = rand(6); sUpdate(s.id, { field: n }, `戦場を決定（1D6=${n}）: ${FIELDS[n - 1][0]}`); } }, '1D6で決める')),
+        h('div', { class: 'fieldlist' }, FIELDS.map(([n, t], i) => h('div', { class: 'frow' + (s.field === i + 1 ? ' on' : '') }, h('b', {}, `${i + 1} ${n}`), h('span', {}, t)))),
+        h('div', { class: 'note' }, '戦闘シーンでは、2D6の目がプロット値以下だとファンブルです。接近戦ダメージはランダム、射撃戦ダメージは「受けた側」が決める、と公式の表に書かれています。')),
+      h('details', { class: 'panel', open: state.hOpen ?? false, ontoggle: (e) => { state.hOpen = e.target.open; } },
+        h('summary', {}, h('strong', {}, '変調表'), (s.tables || {}).hench !== undefined ? h('span', { class: 'badge' }, `出目 ${s.tables.hench}`) : ''),
+        henchBlock(s)),
+    ].filter(Boolean));
+  }
+
+  // ---- 参加者パネル（生命力・変調を1か所に）----
+  function updateSide(s) {
+    const ui = state.roomUI;
+    const gm = s.gmUid === state.uid;
+    const pcs = Object.entries(s.pcs || {});
+    const mySheets = allSheets().filter((x) => x.owner === state.uid);
+    const joined = new Set(pcs.filter(([, p]) => p.ownerUid === state.uid).map(([, p]) => p.sheetId));
+    const free = mySheets.filter((x) => !joined.has(x.id));
+    const joinSel = h('select', { id: 'join-sel', 'aria-label': '参加するキャラシ' }, free.map((x) => h('option', { value: x.id }, x.name)));
+    ui.side.replaceChildren(...[
+      h('div', { class: 'quick' }, h('span', { class: 'note' }, 'PCの画像'),
+        h('button', { type: 'button', class: 'btn small', 'aria-pressed': String(state.pcImgMode !== 'big'), onclick: () => { state.pcImgMode = state.pcImgMode === 'big' ? 'icon' : 'big'; try { localStorage.setItem('sg_pcimg', state.pcImgMode); } catch (_) { /* noop */ } updateSide(sessionById(s.id)); } }, state.pcImgMode === 'big' ? '大きい表示 → アイコンにする' : 'アイコン表示 → 大きくする')),
+      canEditSheets() && h('div', { class: 'panel' },
+        free.length ? h('div', { class: 'quick' }, joinSel, h('button', { class: 'btn small primary', onclick: async () => {
+          const sh = mySheets.find((x) => x.id === joinSel.value);
+          if (!sh) return;
+          const pid = 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 4);
+          await sUpdate(s.id, { pcs: { [pid]: { ownerUid: state.uid, sheetId: sh.id, name: sh.name, extraTotal: calcExtra(sh), extraFilled: 0, filled: {}, hench: {} } } }, `${sh.name}が参加しました`);
+        } }, 'キャラシで参加'))
+          : h('span', { class: 'note' }, mySheets.length ? '自分のキャラシは参加済みです' : 'キャラシを作ると参加できます（「キャラシ」タブ）')),
+      ...(pcs.length ? pcs.map(([pid, pc]) => pcCard(s, pid, pc)) : [h('div', { class: 'none' }, 'まだ参加者がいません。')]),
+    ].filter(Boolean));
+  }
+
+  function pcCard(s, pid, pc) {
+    const fields = slotFields();
+    const sheet = findSheet(pc.ownerUid, pc.sheetId);
+    const filled = pc.filled || {};
+    const eTotal = pc.extraTotal || 0, eFilled = Math.min(pc.extraFilled || 0, eTotal);
+    const left = fields.filter((f) => !filled[f]).length + (eTotal - eFilled);
+    const mineOrGm = pc.ownerUid === state.uid || s.gmUid === state.uid;
+    const toggleField = (f) => sUpdate(s.id, { pcs: { [pid]: { filled: { [f]: !filled[f] } } } }, `${pc.name}: ${f}のスロットを${filled[f] ? '回復' : '塗りつぶし'}（手動）`);
+    const setExtra = (n, why) => sUpdate(s.id, { pcs: { [pid]: { extraFilled: n } } }, `${pc.name}: 追加スロット ${why}`);
+    const skillsBy = sheet ? fields.map((f) => [f, (state.tokugi?.fields.find((x) => x.name === f)?.skills || []).filter((k) => (sheet.skills || []).includes(k))]).filter(([, a]) => a.length) : [];
+    return h('article', { class: 'card pc' },
+      ...(() => {
+        const big = state.pcImgMode === 'big';
+        const img = sheet?.portrait ? portraitEl({ thumb: sheet.portrait, focus: sheet.focus, full: sheet.hasFull ? { kind: 'pc', owner: pc.ownerUid, id: sheet.id } : null, cls: big ? 'pcbanner' : 'pcicon', upgrade: big, alt: pc.name }) : null;
+        const head = h('div', { class: 'pchead' }, h('h2', {}, pc.name || '（名前なし）'),
+          h('span', { class: 'note' }, `PL ${ownerName(pc.ownerUid)}${sheet?.ryuhaId ? ' ／ ' + ryuhaName(sheet.ryuhaId) : ''}${sheet?.rank ? ' ／ ' + sheet.rank : ''}`));
+        return big ? [img, head] : [h('div', { class: 'pcrow' }, img, head)];
+      })(),
+      h('div', { class: 'vital' }, h('span', { class: 'note' }, `生命力 残り${left}`),
+        h('div', { class: 'slots' },
+          ...fields.map((f) => h('button', { type: 'button', class: 'slot' + (filled[f] ? ' on' : ''), title: 'クリックで塗りつぶし／回復', 'aria-pressed': String(!!filled[f]), onclick: () => toggleField(f) }, f)),
+          ...Array.from({ length: eTotal }, (_, i) => h('button', { type: 'button', class: 'slot extra' + (i < eFilled ? ' on' : ''), title: '追加スロット', 'aria-pressed': String(i < eFilled), onclick: () => setExtra(i < eFilled ? eFilled - 1 : eFilled + 1, i < eFilled ? '回復' : '塗りつぶし（手動）') }, '追加')))),
+      h('div', { class: 'vital' }, h('span', { class: 'note' }, '変調'),
+        h('div', { class: 'slots' }, henchNames().map((n) => h('button', { type: 'button', class: 'slot small' + (pc.hench?.[n] ? ' on' : ''), 'aria-pressed': String(!!pc.hench?.[n]), onclick: () => sUpdate(s.id, { pcs: { [pid]: { hench: { [n]: !pc.hench?.[n] } } } }, `${pc.name}: 変調「${n}」を${pc.hench?.[n] ? '回復' : '受けた'}`) }, n)))),
+      skillsBy.length && h('div', { class: 'pcskills' }, skillsBy.map(([f, ks]) => h('div', {}, h('span', { class: 'note' }, `${f}: `), ks.map((k) => h('span', { class: 'sk' + (filled[f] ? ' dead' : '') }, k))))),
+      h('div', { class: 'card-foot' },
+        h('button', { class: 'btn small primary', onclick: () => openDamage(s.id, pid) }, 'ダメージ'),
+        mineOrGm && h('span', { class: 'row-btns' },
+          h('button', { class: 'btn small', title: '追加スロットを増やす', onclick: () => sUpdate(s.id, { pcs: { [pid]: { extraTotal: eTotal + 1 } } }, `${pc.name}: 追加スロット上限を${eTotal + 1}に変更`) }, '追加＋'),
+          h('button', { class: 'btn small', title: '追加スロットを減らす', disabled: eTotal <= 0, onclick: () => sUpdate(s.id, { pcs: { [pid]: { extraTotal: eTotal - 1, extraFilled: Math.min(eFilled, eTotal - 1) } } }, `${pc.name}: 追加スロット上限を${eTotal - 1}に変更`) }, '追加－'),
+          h('button', { class: 'btn small danger', onclick: () => sUpdate(s.id, { pcs: { [pid]: { __delete__: true } } }, `${pc.name}が退出しました`) }, '退出'))));
+  }
+
+  // ---- 部屋の設定（GM）: 場面名・メモ・色・背景画像 ----
+  function openRoomSettings(s) {
+    if (!s || s.gmUid !== state.uid) return;
+    let color = s.bg?.color || ROOM_COLORS[0][1];
+    let imageId = s.bg?.imageId || '';
+    const title = h('input', { type: 'text', id: 'r-title', value: s.bg?.title || '', placeholder: '場面の名前（例: 廃寺の夜）', autocomplete: 'off' });
+    const memo = h('textarea', { id: 'r-memo', placeholder: '場所・状況などのメモ（全員に表示されます）' }, s.bg?.memo || '');
+    const chips = h('div', { class: 'slots' }, ROOM_COLORS.map(([n, c]) => h('button', { type: 'button', class: 'slot', style: `border-color:${c}`, 'aria-pressed': String(c === color), onclick: (e) => { color = c; for (const b of chips.children) b.setAttribute('aria-pressed', String(b === e.currentTarget)); } }, n)));
+    const gallery = h('div', { class: 'gallery' });
+    const upErr = h('div', { class: 'err', role: 'alert' });
+    const renderGallery = () => {
+      gallery.replaceChildren(
+        h('button', { type: 'button', class: 'thumb none', 'aria-pressed': String(!imageId), onclick: () => { imageId = ''; renderGallery(); } }, 'なし'),
+        ...state.images.map((im) => h('button', { type: 'button', class: 'thumb', title: im.name || '', 'aria-pressed': String(imageId === im.id), onclick: () => { imageId = im.id; renderGallery(); } },
+          h('img', { src: `/_blob/${encodeURIComponent(im.id)}`, alt: im.name || '背景画像', loading: 'lazy' }))));
+    };
+    const file = h('input', { type: 'file', id: 'r-file', accept: 'image/*', hidden: true });
+    file.addEventListener('change', async () => {
+      const f = file.files?.[0];
+      if (!f) return;
+      upErr.textContent = '';
+      try {
+        const up = await state.assets.upload(f);
+        await state.db.doc('images/' + up.id).set({ name: f.name, id: up.id, addedAt: Date.now() });
+        imageId = up.id;
+        if (!state.images.some((x) => x.id === up.id)) state.images.push({ id: up.id, name: f.name });
+        renderGallery();
+      } catch (e) { upErr.textContent = `画像を登録できませんでした（${e.code || e.message || 'error'}）。`; }
+      file.value = '';
+    });
+    renderGallery();
+    rdlg.querySelector('#rbody').replaceChildren(
+      h('h3', {}, '部屋の設定'),
+      h('div', { class: 'row' }, field('r-title', '場面の名前', title), h('div', { class: 'field' }, h('label', {}, '色'), chips)),
+      field('r-memo', 'メモ', memo),
+      h('div', { class: 'sec' }, h('h4', {}, '背景画像'), gallery,
+        state.assets ? h('div', {}, h('button', { type: 'button', class: 'btn small', onclick: () => file.click() }, '＋ 画像を登録'), file, upErr)
+          : h('div', { class: 'note' }, '画像を登録できるのは、このページの編集権限を持つ人だけです。登録済みの画像からは、誰でも選べます。')),
+      h('div', { class: 'actions' },
+        h('button', { type: 'button', class: 'btn danger', onclick: async (ev) => {
+          if (ev.target.dataset.armed !== '1') { ev.target.dataset.armed = '1'; ev.target.textContent = '本当に削除する'; return; }
+          rdlg.close(); leaveRoomUI(); state.sessId = null; try { location.hash = ''; } catch (_) { /* noop */ }
+          await state.db.doc('sessions/' + s.id).delete(); renderSessions();
+        } }, '部屋を削除'),
+        h('div', { class: 'right' }, h('button', { type: 'button', class: 'btn', onclick: () => rdlg.close() }, 'キャンセル'),
+          h('button', { type: 'button', class: 'btn primary', onclick: async () => { await sUpdate(s.id, { bg: { title: title.value.trim(), memo: memo.value.trim(), color, imageId } }, `場面を「${title.value.trim() || '（無題）'}」に設定しました`); rdlg.close(); } }, '保存'))));
+    rdlg.showModal();
+  }
+
+  // ---- ダメージ適用 ----
+  function askSlot(pc, free, message) {
+    return new Promise((resolve) => {
+      ddlg.querySelector('#dbody').replaceChildren(
+        h('h3', {}, '塗りつぶす場所を選ぶ'), h('p', {}, message),
+        h('div', { class: 'slots' }, free.map((f) => h('button', { type: 'button', class: 'slot', onclick: () => resolve(f) }, f === '__extra' ? '追加' : f))));
+    });
+  }
+  function openDamage(sid, pid) {
+    const pc0 = sessionById(sid)?.pcs?.[pid];
+    if (!pc0) return;
+    const kind = h('select', { id: 'd-kind' }, h('option', { value: 'melee' }, '接近戦ダメージ（ランダム）'), h('option', { value: 'ranged' }, '射撃戦ダメージ（受けた側が選ぶ）'));
+    const pts = h('input', { type: 'number', id: 'd-pts', min: '1', max: '9', value: '1' });
+    ddlg.querySelector('#dbody').replaceChildren(
+      h('h3', {}, `${pc0.name} にダメージ`),
+      h('div', { class: 'row' }, field('d-kind', '種類', kind), field('d-pts', 'ダメージ点数', pts)),
+      h('p', { class: 'note' }, '接近戦: 分野をランダムに選び、塗りつぶし済みなら被弾側が自由に選びます。射撃戦: 受けた側（被弾側）が自由に選びます。'),
+      h('div', { class: 'actions' }, h('button', { type: 'button', class: 'btn', onclick: () => ddlg.close() }, '閉じる'),
+        h('button', { type: 'button', class: 'btn primary', onclick: async (ev) => { ev.target.disabled = true; try { await applyDamage(sid, pid, kind.value, Math.max(1, parseInt(pts.value, 10) || 1)); } finally { ddlg.close(); } } }, '適用')));
+    ddlg.showModal();
+  }
+  async function applyDamage(sid, pid, kind, points) {
+    const pc = sessionById(sid)?.pcs?.[pid];
+    if (!pc) return;
+    const fields = slotFields();
+    const local = { filled: { ...(pc.filled || {}) }, extraFilled: Math.min(pc.extraFilled || 0, pc.extraTotal || 0), extraTotal: pc.extraTotal || 0 };
+    const kindName = kind === 'melee' ? '接近戦' : '射撃戦';
+    for (let i = 0; i < points; i++) {
+      const free = [...fields.filter((f) => !local.filled[f]), ...(local.extraFilled < local.extraTotal ? ['__extra'] : [])];
+      if (!free.length) { await sUpdate(sid, {}, `${pc.name}: 生命力スロットが残っていません（${kindName}ダメージ ${i + 1}/${points}）`); return; }
+      let slot, how;
+      if (kind === 'melee') {
+        const r = fields[Math.floor(Math.random() * fields.length)];
+        if (!local.filled[r]) { slot = r; how = `ランダム: ${r}`; }
+        else { slot = await askSlot(pc, free, `ランダムで「${r}」が選ばれましたが、塗りつぶし済みです。被弾した ${pc.name} のPLが塗る場所を選んでください。`); how = `${r}が再抽選のため被弾側が選択`; }
+      } else {
+        slot = await askSlot(pc, free, `射撃戦ダメージは受けた側が決めます。${pc.name} のPLが、塗りつぶす場所を選んでください。（${i + 1}/${points}点目）`);
+        how = '被弾側が選択';
+      }
+      if (slot === '__extra') { local.extraFilled += 1; await sUpdate(sid, { pcs: { [pid]: { extraFilled: local.extraFilled } } }, `${pc.name}: ${kindName}ダメージ ${i + 1}/${points} → 追加スロット（${how}）`); }
+      else { local.filled[slot] = true; await sUpdate(sid, { pcs: { [pid]: { filled: { [slot]: true } } } }, `${pc.name}: ${kindName}ダメージ ${i + 1}/${points} → ${slot}（${how}）`); }
+    }
+  }
+
+  // ---------- wiring ----------
+  $('#q').addEventListener('input', (e) => { state.q = e.target.value; renderList(); });
+  $('#sort').addEventListener('change', (e) => { state.sort = e.target.value; renderList(); });
+  $('#chip-clear').addEventListener('click', () => { state.fRyuha.clear(); state.fType.clear(); state.fGroup.clear(); renderChips(); renderList(); });
+  $('#add').addEventListener('click', () => openForm('ninpo', null));
+  for (const b of document.querySelectorAll('.viewbtn')) b.addEventListener('click', () => { state.view = b.dataset.view; renderView(); });
+  $('#idlg-close').addEventListener('click', () => $('#idlg').close());
+  $('#idlg').addEventListener('click', (e) => { if (e.target === $('#idlg')) $('#idlg').close(); });
+  $('#sheet-add').addEventListener('click', () => openSheetEditor(null));
+  $('#sheet-import-btn').addEventListener('click', () => $('#sheet-import').click());
+  $('#sheet-import').addEventListener('change', async (event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    try { await importBab(file); }
+    catch (error) { alert(`BABファイルを取り込めませんでした（${error.message || 'error'}）。`); }
+    event.target.value = '';
+  });
+  $('#enemy-add').addEventListener('click', () => openSheetEditor(null, 'enemy'));
+  $('#eq').addEventListener('input', (e) => { state.eq = e.target.value; renderEnemies(); });
+  $('#sess-new').addEventListener('click', async () => {
+    const name = $('#sess-name').value.trim();
+    if (!name) { $('#sess-name').focus(); return; }
+    const id = 'r' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    await state.db.doc('sessions/' + id).set({ name, gmUid: state.uid, createdAt: Date.now(), pcs: {} });
+    $('#sess-name').value = '';
+    enterRoom(id);
+  });
+  $('#sq').addEventListener('input', (e) => { state.sq = e.target.value; renderSheets(); });
+  renderChips(); renderTabs(); renderList();
+
+  (async () => {
+    const local = window.shinobigamiLocal;
+    const db = local ? await local.use('db') : null;
+    if (!db) {
+      $('#count').textContent = '未接続';
+      $('#list').replaceChildren(h('div', { class: 'none' }, 'ローカルデータサーバーに接続できません。サーバーを起動してから開き直してください。'));
+      return;
+    }
+    state.db = db;
+    try {
+      const user = await local.use('user');
+      state.canWrite = user?.can?.('data.write') !== false;
+      state.userApi = user;
+      try { state.selfName = (await user?.name?.()) || ''; } catch (_) { showUserApiError(); }
+      try { state.uid = user?.id ? await user.id() : null; } catch (_) { showUserApiError(); }
+    } catch (_) { state.canWrite = false; showUserApiError(); }
+    renderTabs();
+
+    const fail = () => { $('#count').textContent = '読み込みに失敗しました'; };
+    db.collection('ryuha').orderBy('order').onSnapshot((snap) => {
+      state.ryuha = fromSnap(snap); state.ready.ryuha = true;
+      renderChips(); renderCount(); renderList();
+    }, fail);
+    db.collection('ninpo').onSnapshot((snap) => {
+      state.ninpo = fromSnap(snap); state.ready.ninpo = true;
+      renderChips(); renderCount(); renderList();
+      if (state.view === 'sheet') renderSheets();
+    }, fail);
+    db.doc('meta/henchou').onSnapshot((snap) => { state.henchRef = snap.exists ? snap.data() : null; if (state.view === 'session') renderSessions(); }, () => {});
+    db.doc('meta/ranks').onSnapshot((snap) => { state.ranks = snap.exists ? snap.data() : null; }, () => {});
+    db.doc('meta/ougi').onSnapshot((snap) => { state.ougiRef = snap.exists ? snap.data() : null; }, () => {});
+    if (state.uid) db.doc('data/users/' + state.uid + '/ougi').onSnapshot((snap) => { state.ougiPriv = snap.exists ? (snap.data().items || {}) : {}; }, () => {});
+    db.doc('meta/tokugi').onSnapshot((snap) => { state.tokugi = snap.exists ? snap.data() : null; }, () => {});
+    try { state.assets = await local.use('assets'); } catch (_) { state.assets = null; }
+    db.collection('images').onSnapshot((snap) => { state.images = fromSnap(snap).sort((a, b) => (a.addedAt || 0) - (b.addedAt || 0)); }, () => {});
+    if (state.uid) db.doc('data/users/' + state.uid + '/enemies').onSnapshot((snap) => { state.enemyItems = snap.exists ? (snap.data().items || {}) : {}; if (state.view === 'enemy') renderEnemies(); }, () => {});
+    db.collection('sessions').onSnapshot((snap) => {
+      state.sessions = fromSnap(snap); state.ready.sessions = true; updateNav();
+      if (!state.hashHandled) {
+        state.hashHandled = true;
+        const hid = roomHash();
+        if (hid && sessionById(hid)) { state.view = 'session'; state.sessId = hid; renderView(); }
+      }
+      if (state.view === 'session') renderSessions();
+    }, () => { state.ready.sessions = true; if (state.view === 'session') renderSessions(); });
+    db.collection('sheets').onSnapshot((snap) => {
+      state.sheetDocs = fromSnap(snap); state.ready.sheets = true;
+      const ids = state.sheetDocs.map((x) => x.id).filter((id) => id !== state.uid && !(id in state.names));
+      if (ids.length && state.userApi?.profiles) {
+        state.userApi.profiles(ids).then((ps) => { for (const id of ids) state.names[id] = ps?.[id]?.name || ''; if (state.view === 'sheet') renderSheets(); }).catch(() => { showUserApiError(); });
+      }
+      if (state.view === 'sheet') renderSheets();
+    }, () => { state.ready.sheets = true; if (state.view === 'sheet') renderSheets(); });
+  })();
+})();
+</script>
+
+</body></html>
