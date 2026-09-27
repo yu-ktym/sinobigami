@@ -695,13 +695,17 @@
     try { await state.db.doc('data/users/' + state.uid + '/ougi').update({ items: { [id]: { __delete__: true } } }); } catch (_) { /* 奥義がなければ何もしない */ }
   }
 
-  // TRPGSheetの .bab は、JSON文字列の各文字コードを +26 した形式です。
+  // TRPGSheetの .bab は、JSON文字列の各文字コードをずらした形式です。
+  // バックアップの世代によりずらし量が異なるため、先頭の「{」から自動判定します。
   // 未対応の項目はメモに残し、資料庫で編集して補完できるようにします。
   function decodeBab(text) {
     const encoded = JSON.parse(text);
     if (typeof encoded !== 'string') throw new Error('BABファイルの形式が正しくありません。');
-    const json = Array.from(encoded, (ch) => String.fromCharCode(ch.charCodeAt(0) - 26)).join('');
-    const data = JSON.parse(json);
+    const shift = encoded.charCodeAt(0) - '{'.charCodeAt(0);
+    const json = Array.from(encoded, (ch) => String.fromCharCode(ch.charCodeAt(0) - shift)).join('');
+    let data;
+    try { data = JSON.parse(json); }
+    catch (_) { throw new Error('対応していないBABファイルの形式です。TRPGSheetのシノビガミ用バックアップを選んでください。'); }
     if (!data || typeof data !== 'object' || !data.Name) throw new Error('シノビガミ用のキャラクターデータが見つかりません。');
     return data;
   }
