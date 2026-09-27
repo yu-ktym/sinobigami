@@ -1704,14 +1704,17 @@
     const eTotal = pc.extraTotal || 0, eFilled = Math.min(pc.extraFilled || 0, eTotal);
     const left = fields.filter((f) => !filled[f]).length + (eTotal - eFilled);
     const mineOrGm = pc.ownerUid === state.uid || s.gmUid === state.uid;
-    // 忍具は部屋ごとに記録する。キャラシートの初期所持数は参加時にコピーされる。
-    const gearN = pc.gearN || sheet?.gearN || {};
+    // 忍具の所持数はキャラシート本体を正とし、部屋から直接更新する。
+    const gearN = sheet?.gearN || pc.gearN || {};
     const gearTypes = [['hyoro', '兵糧丸'], ['jinzu', '神通丸'], ['tonkou', '遁甲符']];
     const gearCount = (key) => Math.max(0, Number.parseInt(gearN[key], 10) || 0);
-    const changeGear = (key, delta) => {
+    const changeGear = async (key, delta) => {
       const next = Math.max(0, gearCount(key) + delta);
       const label = gearTypes.find(([id]) => id === key)?.[1] || '忍具';
-      return sUpdate(s.id, { pcs: { [pid]: { gearN: { [key]: next } } } }, `${pc.name}: ${label}を${delta > 0 ? '1個増やしました' : '1個使いました'}（残り${next}個）`);
+      if (!sheet) throw new Error('キャラシートが見つかりません。');
+      await state.db.doc('sheets/' + pc.ownerUid).update({ items: { [pc.sheetId]: { gearN: { [key]: String(next) }, updatedAt: Date.now() } } });
+      // 部屋の参加記録も更新し、ほかの参加者の表示をすぐにそろえる。
+      await sUpdate(s.id, { pcs: { [pid]: { gearN: { [key]: String(next) } } } }, `${pc.name}: ${label}を${delta > 0 ? '1個増やしました' : '1個使いました'}（残り${next}個）`);
     };
     const toggleField = (f) => sUpdate(s.id, { pcs: { [pid]: { filled: { [f]: !filled[f] } } } }, `${pc.name}: ${f}のスロットを${filled[f] ? '回復' : '塗りつぶし'}（手動）`);
     const setExtra = (n, why) => sUpdate(s.id, { pcs: { [pid]: { extraFilled: n } } }, `${pc.name}: 追加スロット ${why}`);
@@ -1730,7 +1733,7 @@
           ...Array.from({ length: eTotal }, (_, i) => h('button', { type: 'button', class: 'slot extra' + (i < eFilled ? ' on' : ''), title: '追加スロット', 'aria-pressed': String(i < eFilled), onclick: () => setExtra(i < eFilled ? eFilled - 1 : eFilled + 1, i < eFilled ? '回復' : '塗りつぶし（手動）') }, '追加')))),
       h('div', { class: 'vital' }, h('span', { class: 'note' }, '変調'),
         h('div', { class: 'slots' }, henchNames().map((n) => h('button', { type: 'button', class: 'slot small' + (pc.hench?.[n] ? ' on' : ''), 'aria-pressed': String(!!pc.hench?.[n]), onclick: () => sUpdate(s.id, { pcs: { [pid]: { hench: { [n]: !pc.hench?.[n] } } } }, `${pc.name}: 変調「${n}」を${pc.hench?.[n] ? '回復' : '受けた'}`) }, n)))),
-      h('div', { class: 'vital' }, h('span', { class: 'note' }, '忍具（この部屋での残数）'),
+      h('div', { class: 'vital' }, h('span', { class: 'note' }, '忍具（キャラシの所持数）'),
         h('div', { class: 'gearrow' }, gearTypes.map(([key, label]) => h('div', { class: 'quick' },
           h('span', { class: 'note' }, label),
           h('button', { type: 'button', class: 'btn small', disabled: !mineOrGm || gearCount(key) <= 0, title: `${label}を1個使う`, onclick: () => changeGear(key, -1) }, '－'),
